@@ -1,0 +1,49 @@
+# ─────────────────────────────────────────────
+#  Modern Mystic Woman — Netlify Configuration
+# ─────────────────────────────────────────────
+
+[build]
+  publish = "."        # Root of your site (change to "dist" or "public" if needed)
+  command = ""         # No build command needed for plain HTML
+
+# ── REDIRECTS ──────────────────────────────────
+# Force all course.html visits through login check
+[[redirects]]
+  from = "/course"
+  to   = "/course.html"
+  status = 200
+
+# Friendly URL: /login → login.html
+[[redirects]]
+  from = "/login"
+  to   = "/login.html"
+  status = 200
+
+# If Identity token is invalid/missing, redirect to login
+# (the JS in course.html handles this client-side too)
+[[redirects]]
+  from = "/course.html"
+  to   = "/login.html"
+  status = 302
+  conditions = {Role = []}   # No role = not logged in → go to login
+
+# ── HEADERS ────────────────────────────────────
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+
+# Cache fonts and static assets aggressively
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Don't cache HTML pages (so updates deploy instantly)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

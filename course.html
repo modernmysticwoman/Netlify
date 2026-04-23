@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Glow Up Codex — Course Portal · Modern Mystic Woman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600;900&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root{--ob:#0a0608;--dw:#1a0810;--mn:#2a0d18;--cr:#8b1a2a;--go:#c9a84c;--gl:#e8c97a;--gp:#f5e6b8;--cm:#f0e6d3;--mu:#8a7a6a;--sw:284px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ob);color:var(--cm);font-family:'Raleway',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6;}
+button{font-family:inherit;border:none;background:none;}
+ul{list-style:none;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);}
+
+/* SHELL */
+.shell{display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:var(--sw);flex-shrink:0;background:var(--dw);border-right:1px solid rgba(201,168,76,.1);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:300;transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.sb-brand{padding:20px 20px 15px;border-bottom:1px solid rgba(201,168,76,.1);flex-shrink:0;}
+.sb-logo{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.35em;color:var(--go);text-transform:uppercase;display:block;margin-bottom:4px;}
+.sb-course{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--cm);}
+.sb-progress{padding:12px 20px 13px;border-bottom:1px solid rgba(201,168,76,.08);flex-shrink:0;}
+.sb-prog-row{display:flex;justify-content:space-between;font-size:.54rem;letter-spacing:.18em;color:var(--mu);text-transform:uppercase;margin-bottom:6px;}
+.sb-prog-pct{color:var(--go);}
+.sb-track{height:2px;background:rgba(201,168,76,.1);}
+.sb-fill{height:100%;background:linear-gradient(90deg,var(--cr),var(--go));transition:width .6s ease;}
+.sb-sub{margin-top:5px;font-size:.57rem;color:var(--mu);font-family:'Cormorant Garamond',serif;font-style:italic;}
+.sb-nav{flex:1;padding:8px 0;}
+.sb-sect{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.38em;color:rgba(201,168,76,.28);text-transform:uppercase;padding:11px 20px 4px;display:block;}
+.mh{display:flex;align-items:center;gap:8px;padding:8px 20px;cursor:pointer;transition:all .2s;border-left:2px solid transparent;user-select:none;}
+.mh:hover{background:rgba(201,168,76,.03);}
+.mh.active{border-left-color:var(--go);background:rgba(201,168,76,.04);}
+.mh.active .mh-name{color:var(--go);}
+.mh-n{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:rgba(201,168,76,.2);width:16px;flex-shrink:0;line-height:1;}
+.mh.active .mh-n{color:var(--go);}
+.mh-name{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.19em;text-transform:uppercase;color:rgba(240,230,211,.42);flex:1;line-height:1.4;}
+.mh-arr{font-size:.48rem;color:rgba(201,168,76,.28);transition:transform .3s;flex-shrink:0;}
+.mh.open .mh-arr{transform:rotate(90deg);}
+.ll{overflow:hidden;max-height:0;transition:max-height .35s cubic-bezier(.16,1,.3,1);}
+.ll.open{max-height:500px;}
+.lb{display:flex;align-items:center;gap:7px;padding:5px 20px 5px 45px;cursor:pointer;width:100%;text-align:left;transition:all .17s;border-left:2px solid transparent;}
+.lb:hover{background:rgba(201,168,76,.03);}
+.lb.active{background:rgba(139,26,42,.13);border-left-color:var(--cr);}
+.lb.done .ld{background:var(--go);box-shadow:0 0 4px rgba(201,168,76,.4);}
+.ld{width:5px;height:5px;border-radius:50%;background:rgba(201,168,76,.15);flex-shrink:0;transition:all .22s;}
+.lb.active .ld{background:var(--cr);}
+.lb-n{font-size:.67rem;color:rgba(240,230,211,.4);line-height:1.3;flex:1;transition:color .17s;}
+.lb:hover .lb-n{color:rgba(240,230,211,.68);}
+.lb.active .lb-n{color:var(--cm);}
+.lb.done .lb-n{color:var(--mu);}
+.lb-c{font-size:.5rem;color:var(--go);flex-shrink:0;opacity:0;transition:opacity .22s;}
+.lb.done .lb-c{opacity:1;}
+.sb-blink{display:flex;align-items:center;gap:8px;padding:8px 20px;cursor:pointer;transition:all .2s;border-left:2px solid transparent;}
+.sb-blink:hover{background:rgba(201,168,76,.03);}
+.sb-blink.active{border-left-color:var(--go);background:rgba(201,168,76,.04);}
+.sb-blink.active .mh-name{color:var(--go);}
+.sb-bot{padding:13px 20px 17px;border-top:1px solid rgba(201,168,76,.08);flex-shrink:0;}
+.sb-comm{width:100%;padding:9px 0;background:rgba(139,26,42,.2);border:1px solid rgba(201,168,76,.13);font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.22em;color:var(--go);text-transform:uppercase;cursor:pointer;transition:all .25s;}
+.sb-comm:hover{background:rgba(139,26,42,.4);border-color:rgba(201,168,76,.3);}
+.sb-streak{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;font-size:.54rem;letter-spacing:.13em;color:var(--mu);}
+.sb-streak em{color:var(--gl);font-style:normal;}
+
+/* MAIN */
+.main{margin-left:var(--sw);flex:1;min-width:0;display:flex;flex-direction:column;}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:200;background:rgba(10,6,8,.94);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,.07);padding:0 40px;height:50px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.tb-l{display:flex;align-items:center;gap:10px;min-width:0;}
+.hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:5px;background:none;border:none;}
+.hbg span{display:block;width:18px;height:1px;background:var(--go);}
+.crumb{font-size:.58rem;letter-spacing:.13em;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.crumb em{color:var(--gl);font-style:normal;}
+.tb-r{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.chip{display:flex;align-items:center;gap:4px;padding:4px 11px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.13);font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.16em;color:var(--go);white-space:nowrap;}
+.cbtn{padding:6px 15px;background:linear-gradient(135deg,var(--gp),var(--go));font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.17em;color:var(--ob);text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.cbtn:hover{filter:brightness(1.07);transform:translateY(-1px);}
+.cbtn.done{background:rgba(201,168,76,.1);color:var(--go);border:1px solid rgba(201,168,76,.2);}
+
+/* VIEWS */
+.lv{display:none;flex-direction:column;flex:1;}
+.lv.on{display:flex;}
+.bv{display:none;flex-direction:column;flex:1;}
+.bv.on{display:flex;}
+
+/* LESSON HERO */
+.lhero{padding:44px 44px 30px;background:linear-gradient(160deg,rgba(139,26,42,.15) 0%,var(--ob) 65%);border-bottom:1px solid rgba(201,168,76,.07);position:relative;overflow:hidden;flex-shrink:0;}
+.lhero-deco{position:absolute;right:44px;top:50%;transform:translateY(-50%);font-size:8rem;color:rgba(201,168,76,.04);pointer-events:none;line-height:1;font-family:'Cormorant Garamond',serif;}
+.ltag{display:inline-flex;align-items:center;gap:7px;margin-bottom:11px;font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.34em;color:var(--cr);text-transform:uppercase;}
+.ltag::before{content:'';width:16px;height:1px;background:var(--cr);flex-shrink:0;}
+.ltitle{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.05;letter-spacing:.02em;margin-bottom:8px;background:linear-gradient(135deg,var(--gp) 0%,var(--go) 50%,var(--gl) 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lsub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.08rem;color:rgba(240,230,211,.56);margin-bottom:16px;}
+.lmeta{display:flex;flex-wrap:wrap;gap:16px;}
+.lmi{display:flex;align-items:center;gap:4px;font-size:.6rem;letter-spacing:.1em;color:var(--mu);}
+.lmi-ic{color:var(--go);font-size:.7rem;}
+
+/* BODY */
+.lbody{display:flex;flex:1;min-height:0;}
+.lcon{flex:1;min-width:0;padding:38px 44px 52px;max-width:780px;}
+.laside{width:248px;flex-shrink:0;border-left:1px solid rgba(201,168,76,.07);padding:26px 18px;position:sticky;top:50px;max-height:calc(100vh - 50px);overflow-y:auto;}
+
+/* VIDEO */
+.vblock{width:100%;aspect-ratio:16/9;position:relative;background:var(--mn);border:1px solid rgba(201,168,76,.1);overflow:hidden;margin-bottom:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.vblock::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(139,26,42,.17) 0%,transparent 60%);}
+.vbtn{width:58px;height:58px;border:1px solid rgba(201,168,76,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;transition:all .27s;background:rgba(10,6,8,.25);}
+.vblock:hover .vbtn{border-color:var(--go);background:rgba(201,168,76,.1);transform:scale(1.08);}
+.vbtn svg{color:var(--go);margin-left:3px;}
+.vdur{position:absolute;bottom:12px;right:14px;z-index:1;font-size:.58rem;letter-spacing:.1em;color:rgba(240,230,211,.35);}
+.vtag{position:absolute;bottom:12px;left:14px;z-index:1;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.26em;color:rgba(201,168,76,.3);text-transform:uppercase;}
+
+/* ATOMS */
+.gr{display:flex;align-items:center;gap:11px;margin:30px 0;}
+.gr-l{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.15),transparent);}
+.gr-d{color:var(--go);font-size:.6rem;flex-shrink:0;}
+.iq{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;line-height:1.7;color:rgba(240,230,211,.78);padding-left:15px;border-left:2px solid rgba(201,168,76,.26);margin-bottom:24px;}
+.pr{font-size:.85rem;line-height:1.92;color:rgba(240,230,211,.58);margin-bottom:21px;letter-spacing:.015em;}
+.pr strong{color:var(--cm);font-weight:400;}
+.pr em{color:var(--gl);font-style:italic;}
+.hl{background:rgba(139,26,42,.12);border:1px solid rgba(201,168,76,.12);border-left:3px solid var(--go);padding:19px 22px;margin:24px 0;position:relative;}
+.hl::after{content:'✦';position:absolute;top:12px;right:14px;color:rgba(201,168,76,.1);font-size:1.1rem;}
+.hl-l{font-family:'Cinzel',serif;font-size:.43rem;letter-spacing:.32em;color:var(--go);text-transform:uppercase;margin-bottom:6px;}
+.hl-t{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.96rem;color:var(--cm);line-height:1.6;}
+.tb{text-align:center;padding:30px 26px;margin:24px 0;background:var(--mn);border:1px solid rgba(201,168,76,.09);position:relative;overflow:hidden;}
+.tb-bg{position:absolute;top:7px;left:13px;font-family:'Cormorant Garamond',serif;font-size:3.8rem;color:rgba(201,168,76,.05);line-height:1;pointer-events:none;}
+.tb-tag{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.42em;color:var(--cr);text-transform:uppercase;margin-bottom:9px;display:block;}
+.tb-q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--cm);line-height:1.4;}
+.tb-q em{color:var(--gl);}
+.sh{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.26em;color:var(--go);text-transform:uppercase;margin-bottom:14px;}
+.steps{display:flex;flex-direction:column;gap:11px;margin-bottom:26px;}
+.step{display:flex;gap:13px;padding:13px 15px;background:rgba(26,8,16,.55);border:1px solid rgba(201,168,76,.07);transition:border-color .22s;}
+.step:hover{border-color:rgba(201,168,76,.16);}
+.st-n{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:rgba(201,168,76,.17);flex-shrink:0;width:23px;text-align:center;line-height:1.2;}
+.st-ti{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.93rem;color:var(--cm);margin-bottom:3px;}
+.st-d{font-size:.76rem;color:rgba(240,230,211,.48);line-height:1.6;}
+.jbox{background:var(--dw);border:1px solid rgba(201,168,76,.09);padding:22px;margin:24px 0;}
+.jh{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.ji{font-size:1.1rem;}
+.jl{font-family:'Cinzel',serif;font-size:.53rem;letter-spacing:.26em;color:var(--go);text-transform:uppercase;}
+.jps li{display:flex;gap:8px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:rgba(240,230,211,.65);line-height:1.5;padding:8px 0;border-bottom:1px solid rgba(201,168,76,.06);}
+.jps li:last-child{border-bottom:none;}
+.jps li::before{content:'✦';color:var(--go);opacity:.4;flex-shrink:0;font-style:normal;font-size:.56rem;margin-top:3px;}
+.aff{text-align:center;padding:30px 22px;margin:24px 0;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(139,26,42,.25) 0%,transparent 70%),var(--mn);border:1px solid rgba(201,168,76,.12);position:relative;}
+.ac{position:absolute;width:12px;height:12px;border-color:rgba(201,168,76,.36);border-style:solid;}
+.ac.tl{top:8px;left:8px;border-width:1px 0 0 1px;}
+.ac.tr{top:8px;right:8px;border-width:1px 1px 0 0;}
+.ac.bl{bottom:8px;left:8px;border-width:0 0 1px 1px;}
+.ac.br{bottom:8px;right:8px;border-width:0 1px 1px 0;}
+.aff-ey{font-family:'Cinzel',serif;font-size:.41rem;letter-spacing:.37em;color:var(--go);text-transform:uppercase;opacity:.6;margin-bottom:11px;}
+.aff-t{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--cm);line-height:1.5;margin-bottom:10px;}
+.aff-t em{color:var(--gl);}
+.aff-i{font-size:.61rem;letter-spacing:.1em;color:var(--mu);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:24px;}
+.cc{background:rgba(26,8,16,.55);border:1px solid rgba(201,168,76,.07);padding:16px;}
+.ccl{font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:.26em;color:var(--mu);text-transform:uppercase;margin-bottom:8px;}
+.ccl.g{color:var(--go);}
+.cc li{font-size:.76rem;color:rgba(240,230,211,.5);padding:4px 0;border-bottom:1px solid rgba(201,168,76,.05);display:flex;gap:6px;align-items:flex-start;line-height:1.45;}
+.cc li:last-child{border-bottom:none;}
+.cc li::before{content:'✗';color:var(--mu);flex-shrink:0;font-size:.6rem;}
+.cc.af li::before{content:'✦';color:var(--go);opacity:.5;}
+
+/* LESSON NAV */
+.lnav{display:flex;justify-content:space-between;gap:12px;padding-top:30px;border-top:1px solid rgba(201,168,76,.08);margin-top:30px;}
+.lnb{display:flex;flex-direction:column;gap:3px;flex:1;padding:11px 14px;border:1px solid rgba(201,168,76,.1);cursor:pointer;transition:all .22s;text-align:left;}
+.lnb:last-child{text-align:right;align-items:flex-end;}
+.lnb:hover{border-color:rgba(201,168,76,.24);background:rgba(201,168,76,.03);}
+.lnb-d{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.3em;color:var(--mu);text-transform:uppercase;}
+.lnb-n{font-size:.74rem;color:var(--cm);}
+.lnb-a{color:var(--go);font-size:.8rem;}
+
+/* ASIDE */
+.aw{margin-bottom:22px;}
+.awt{font-family:'Cinzel',serif;font-size:.49rem;letter-spacing:.32em;color:var(--go);text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid rgba(201,168,76,.1);margin-bottom:10px;}
+.amp{background:rgba(139,26,42,.1);border:1px solid rgba(201,168,76,.08);padding:13px;margin-bottom:8px;}
+.amp-r{display:flex;justify-content:space-between;font-size:.55rem;color:var(--mu);margin-bottom:5px;}
+.amp-p{color:var(--go);}
+.amp-tr{height:2px;background:rgba(201,168,76,.08);}
+.amp-f{height:100%;background:var(--go);transition:width .5s;}
+.amp-s{font-family:'Cormorant Garamond',serif;font-size:.86rem;color:var(--go);margin-top:4px;}
+.amp-s span{font-size:.54rem;color:var(--mu);font-family:'Raleway',sans-serif;}
+.all li{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid rgba(201,168,76,.05);cursor:pointer;transition:all .16s;}
+.all li:hover .aln{color:var(--cm);}
+.all li:last-child{border-bottom:none;}
+.aln-n{font-family:'Cormorant Garamond',serif;font-size:.85rem;color:rgba(201,168,76,.2);width:15px;}
+.aln{font-size:.65rem;color:rgba(240,230,211,.4);flex:1;line-height:1.3;}
+.als{font-size:.5rem;color:var(--mu);flex-shrink:0;}
+.all li.curr .aln{color:var(--gl);}
+.all li.curr .aln-n{color:var(--go);}
+.all li.dn .aln{color:var(--mu);}
+.all li.dn .als{color:var(--go);}
+.rr{display:flex;align-items:center;gap:8px;padding:7px 9px;background:rgba(26,8,16,.5);border:1px solid rgba(201,168,76,.07);margin-bottom:5px;cursor:pointer;transition:all .18s;}
+.rr:hover{border-color:rgba(201,168,76,.17);}
+.rr-ic{font-size:.92rem;flex-shrink:0;}
+.rr-n{font-size:.66rem;color:var(--cm);display:block;}
+.rr-t{font-size:.54rem;color:var(--mu);letter-spacing:.06em;}
+.rm{text-align:center;background:var(--mn);border:1px solid rgba(201,168,76,.08);padding:14px 11px;}
+.rm-s{font-size:1.3rem;display:block;margin-bottom:4px;}
+.rm-t{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:rgba(240,230,211,.5);line-height:1.5;}
+
+/* BONUS */
+.bhero{padding:44px 44px 32px;background:linear-gradient(160deg,rgba(139,26,42,.18) 0%,var(--ob) 60%);border-bottom:1px solid rgba(201,168,76,.07);flex-shrink:0;}
+.bh-ey{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.41em;color:var(--go);text-transform:uppercase;opacity:.7;margin-bottom:9px;}
+.bh-ti{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1.6rem,3.5vw,2.8rem);line-height:1;letter-spacing:.02em;background:linear-gradient(135deg,var(--gp) 0%,var(--go) 50%,var(--gl) 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:7px;}
+.bh-su{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(240,230,211,.5);}
+.bh-to{margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.92rem;color:rgba(201,168,76,.45);}
+.bbody{padding:38px 44px 52px;max-width:840px;}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:44px;}
+.bcard{background:var(--mn);border:1px solid rgba(201,168,76,.1);padding:22px 20px;position:relative;overflow:hidden;transition:border-color .25s;}
+.bcard::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--go),transparent);transform:scaleX(0);transition:transform .35s;}
+.bcard:hover{border-color:rgba(201,168,76,.19);}
+.bcard:hover::before{transform:scaleX(1);}
+.bc-ic{font-size:1.8rem;margin-bottom:11px;display:block;}
+.bc-ti{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.22em;color:var(--go);text-transform:uppercase;margin-bottom:6px;}
+.bc-de{font-size:.77rem;line-height:1.66;color:rgba(240,230,211,.5);margin-bottom:11px;}
+.bc-in{font-family:'Cinzel',serif;font-size:.43rem;letter-spacing:.17em;color:var(--mu);text-transform:uppercase;margin-bottom:6px;}
+.bc-li li{font-size:.71rem;color:rgba(240,230,211,.46);padding:3px 0;display:flex;gap:6px;}
+.bc-li li::before{content:'✦';color:var(--go);flex-shrink:0;opacity:.36;font-size:.46rem;margin-top:3px;}
+.bc-vr{margin-top:13px;display:flex;justify-content:space-between;align-items:center;}
+.bc-v{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gl);}
+.bc-dl{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.17em;color:var(--ob);background:linear-gradient(135deg,var(--gp),var(--go));padding:5px 13px;cursor:pointer;text-transform:uppercase;transition:filter .2s;}
+.bc-dl:hover{filter:brightness(1.08);}
+.tsect{margin-top:44px;}
+.ts-ti{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.32em;color:var(--go);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid rgba(201,168,76,.11);}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid rgba(201,168,76,.08);}
+.tc{padding:26px 20px;border-right:1px solid rgba(201,168,76,.07);border-bottom:1px solid rgba(201,168,76,.07);transition:background .25s;text-align:center;}
+.tc:nth-child(3n){border-right:none;}
+.tc:nth-child(7),.tc:nth-child(8),.tc:nth-child(9){border-bottom:none;}
+.tc:hover{background:rgba(201,168,76,.03);}
+.tc-n{font-family:'Cormorant Garamond',serif;font-size:.6rem;letter-spacing:.26em;color:rgba(201,168,76,.3);margin-bottom:9px;}
+.tc-t{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.94rem;color:var(--cm);line-height:1.5;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;z-index:9999;background:var(--dw);border:1px solid rgba(201,168,76,.19);padding:11px 16px;display:flex;align-items:center;gap:8px;transform:translateX(130%);transition:transform .36s cubic-bezier(.16,1,.3,1);box-shadow:0 14px 45px rgba(0,0,0,.6);max-width:290px;}
+.toast.on{transform:translateX(0);}
+.t-s{color:var(--go);flex-shrink:0;font-size:.82rem;}
+.t-m{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.15em;color:var(--cm);text-transform:uppercase;}
+
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:250;backdrop-filter:blur(3px);}
+
+/* ANIMATIONS */
+@keyframes fu{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fu .5s ease both;}
+.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}.d4{animation-delay:.32s}
+
+/* RESPONSIVE */
+@media(max-width:1060px){.laside{display:none;}}
+@media(max-width:768px){
+  :root{--sw:0px;}
+  .sidebar{transform:translateX(-284px);width:284px;box-shadow:4px 0 36px rgba(0,0,0,.5);}
+  .sidebar.open{transform:translateX(0);}
+  .overlay{display:block;opacity:0;pointer-events:none;transition:opacity .3s;}
+  .overlay.show{opacity:1;pointer-events:all;}
+  .main{margin-left:0;}
+  .hbg{display:flex;}
+  .topbar{padding:0 12px;}
+  .chip{display:none;}
+  .lhero{padding:38px 20px 24px;}
+  .lhero-deco{display:none;}
+  .lcon{padding:26px 20px 44px;}
+  .bhero{padding:38px 20px 26px;}
+  .bbody{padding:24px 20px 44px;}
+  .bgrid{grid-template-columns:1fr;}
+  .tgrid{grid-template-columns:1fr 1fr;}
+  .two{grid-template-columns:1fr;}
+  .lnav{flex-direction:column;}
+  .lnb:last-child{text-align:left;align-items:flex-start;}
+}
+@media(max-width:440px){
+  .lhero,.lcon,.bhero,.bbody{padding-left:14px;padding-right:14px;}
+  .tgrid{grid-template-columns:1fr;}
+  .tc:nth-child(3n){border-right:1px solid rgba(201,168,76,.07);}
+  .tc:nth-child(7),.tc:nth-child(8){border-bottom:1px solid rgba(201,168,76,.07);}
+  .cbtn{font-size:.42rem;padding:5px 10px;}
+}
+</style>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+  /* Auth gate overlay — shown while checking login */
+  #auth-gate{position:fixed;inset:0;background:#0a0608;z-index:99999;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+  .auth-sym{font-size:2rem;color:#c9a84c;animation:authSpin 2.5s linear infinite;}
+  @keyframes authSpin{0%{opacity:.3;transform:rotate(0deg)}50%{opacity:1}100%{opacity:.3;transform:rotate(360deg)}}
+  .auth-txt{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.4em;color:#8a7a6a;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<!-- Auth gate: visible while checking login status -->
+<div id="auth-gate">
+  <span class="auth-sym">☽</span>
+  <span class="auth-txt">Verifying access...</span>
+</div>
+
+<!-- Netlify Identity auth check -->
+<script>
+(function() {
+  // Check for Netlify Identity session
+  function getUser() {
+    try {
+      // netlifyIdentity stores user in localStorage
+      var key = Object.keys(localStorage).find(k => k.startsWith('gotrue-'));
+      if (key) {
+        var data = JSON.parse(localStorage.getItem(key));
+        return data && data.access_token ? data : null;
+      }
+    } catch(e) {}
+    return null;
+  }
+
+  netlifyIdentity.on('init', function(user) {
+    if (!user) {
+      // Not logged in — redirect to login page
+      window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+    } else {
+      // Logged in — show the course, hide the gate
+      document.getElementById('auth-gate').style.display = 'none';
+    }
+  });
+
+  // Safety timeout: if Identity takes >4s, redirect to login
+  setTimeout(function() {
+    var gate = document.getElementById('auth-gate');
+    if (gate && gate.style.display !== 'none') {
+      window.location.href = '/login.html';
+    }
+  }, 4000);
+
+  // Add logout button to sidebar bottom
+  document.addEventListener('DOMContentLoaded', function() {
+    var sbBot = document.querySelector('.sb-bot');
+    if (sbBot) {
+      var logoutBtn = document.createElement('button');
+      logoutBtn.className = 'sb-comm';
+      logoutBtn.style.marginTop = '8px';
+      logoutBtn.style.background = 'transparent';
+      logoutBtn.style.border = '1px solid rgba(201,168,76,.1)';
+      logoutBtn.style.color = 'var(--mu)';
+      logoutBtn.style.fontSize = '.44rem';
+      logoutBtn.textContent = 'Sign Out';
+      logoutBtn.onclick = function() {
+        netlifyIdentity.logout();
+      };
+      sbBot.appendChild(logoutBtn);
+    }
+  });
+
+  netlifyIdentity.on('logout', function() {
+    window.location.href = '/login.html';
+  });
+})();
+</script>
+
+<div class="toast" id="toast"><span class="t-s">✦</span><span class="t-m" id="tmsg"></span></div>
+<div class="overlay" id="ov" onclick="closeSB()"></div>
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sb">
+  <div class="sb-brand"><span class="sb-logo">Modern Mystic Woman</span><div class="sb-course">The Glow Up Codex</div></div>
+  <div class="sb-progress">
+    <div class="sb-prog-row"><span>Your Progress</span><span class="sb-prog-pct" id="pct">8%</span></div>
+    <div class="sb-track"><div class="sb-fill" id="pf" style="width:8%"></div></div>
+    <div class="sb-sub" id="ps">2 of 24 lessons complete</div>
+  </div>
+  <nav class="sb-nav">
+    <span class="sb-sect">Course Modules</span>
+    <div class="mh active open" data-m="0" onclick="togM(0,this)"><span class="mh-n">01</span><span class="mh-name">Sovereign Mindset</span><span class="mh-arr">▸</span></div>
+    <ul class="ll open" id="m0">
+      <li><button class="lb done" onclick="goL('m1l1',this)"><div class="ld"></div><span class="lb-n">The Worth Declaration</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb done" onclick="goL('m1l2',this)"><div class="ld"></div><span class="lb-n">Releasing Validation</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb active" onclick="goL('m1l3',this)"><div class="ld"></div><span class="lb-n">Rewriting Your Story</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m1l4',this)"><div class="ld"></div><span class="lb-n">Identity Audit</span><span class="lb-c">✓</span></button></li>
+    </ul>
+    <div class="mh" data-m="1" onclick="togM(1,this)"><span class="mh-n">02</span><span class="mh-name">Sacred Morning Architecture</span><span class="mh-arr">▸</span></div>
+    <ul class="ll" id="m1">
+      <li><button class="lb" onclick="goL('m2l1',this)"><div class="ld"></div><span class="lb-n">The Mystic Morning Stack</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m2l2',this)"><div class="ld"></div><span class="lb-n">Mirror Work &amp; Declarations</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m2l3',this)"><div class="ld"></div><span class="lb-n">Journaling Templates</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m2l4',this)"><div class="ld"></div><span class="lb-n">The 5-Minute Version</span><span class="lb-c">✓</span></button></li>
+    </ul>
+    <div class="mh" data-m="2" onclick="togM(2,this)"><span class="mh-n">03</span><span class="mh-name">The Art of the Elegant No</span><span class="mh-arr">▸</span></div>
+    <ul class="ll" id="m2">
+      <li><button class="lb" onclick="goL('m3l1',this)"><div class="ld"></div><span class="lb-n">The 3-Tier Boundary System</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m3l2',this)"><div class="ld"></div><span class="lb-n">Scripts for Every Situation</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m3l3',this)"><div class="ld"></div><span class="lb-n">Handling Pushback with Grace</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m3l4',this)"><div class="ld"></div><span class="lb-n">Your Boundary Audit</span><span class="lb-c">✓</span></button></li>
+    </ul>
+    <div class="mh" data-m="3" onclick="togM(3,this)"><span class="mh-n">04</span><span class="mh-name">Elegance as a Way of Being</span><span class="mh-arr">▸</span></div>
+    <ul class="ll" id="m3">
+      <li><button class="lb" onclick="goL('m4l1',this)"><div class="ld"></div><span class="lb-n">Body Language of the Sovereign Woman</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m4l2',this)"><div class="ld"></div><span class="lb-n">Building Your Style Philosophy</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m4l3',this)"><div class="ld"></div><span class="lb-n">Voice, Pace &amp; Strategic Silence</span><span class="lb-c">✓</span></button></li>
+    </ul>
+    <div class="mh" data-m="4" onclick="togM(4,this)"><span class="mh-n">05</span><span class="mh-name">Quality Over Everything</span><span class="mh-arr">▸</span></div>
+    <ul class="ll" id="m4">
+      <li><button class="lb" onclick="goL('m5l1',this)"><div class="ld"></div><span class="lb-n">The Life Quality Audit</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m5l2',this)"><div class="ld"></div><span class="lb-n">Releasing What No Longer Fits</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m5l3',this)"><div class="ld"></div><span class="lb-n">Attraction vs. Pursuit</span><span class="lb-c">✓</span></button></li>
+    </ul>
+    <div class="mh" data-m="5" onclick="togM(5,this)"><span class="mh-n">06</span><span class="mh-name">The Unforgettable Woman</span><span class="mh-arr">▸</span></div>
+    <ul class="ll" id="m5">
+      <li><button class="lb" onclick="goL('m6l1',this)"><div class="ld"></div><span class="lb-n">Silence as the Ultimate Power Move</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m6l2',this)"><div class="ld"></div><span class="lb-n">The Mystery Practice</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m6l3',this)"><div class="ld"></div><span class="lb-n">The Becoming Ceremony ✦</span><span class="lb-c">✓</span></button></li>
+    </ul>
+    <span class="sb-sect" style="margin-top:5px">Your Vault</span>
+    <div class="sb-blink" id="sbb" onclick="goBonus()"><span class="mh-n">✦</span><span class="mh-name">Bonus Vault</span></div>
+  </nav>
+  <div class="sb-bot">
+    <button class="sb-comm" onclick="showT('Opening Inner Sanctum...')">✦ Inner Sanctum Community</button>
+    <div class="sb-streak">🔥 &nbsp;Day <em>3</em> &nbsp;· Current Streak</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main">
+  <div class="topbar">
+    <div class="tb-l">
+      <button class="hbg" onclick="openSB()"><span></span><span></span><span></span></button>
+      <div class="crumb" id="crumb">Module <em>01 · Sovereign Mindset</em> &nbsp;/ Lesson 3 of 4</div>
+    </div>
+    <div class="tb-r">
+      <div class="chip">🔥 Day 3 Streak</div>
+      <button class="cbtn" id="cb" onclick="markDone()">✦ Mark Complete</button>
+    </div>
+  </div>
+
+
+  <!-- ===== M1L1 ===== -->
+  <div class="lv" id="lv-m1l1">
+    <div class="lhero"><div class="lhero-deco">🜂</div><div class="ltag">Module 01 · Foundation</div><h1 class="ltitle fu">The Worth Declaration</h1><p class="lsub fu d1">Your non-negotiable foundation. Built once. Held forever.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>14 min</span><span class="lmi"><span class="lmi-ic">✍</span>Journal prompts</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 01</span></div></div>
+    <div class="lbody"><div class="lcon">
+      <div class="vblock fu" onclick="showT('▶ Playing: The Worth Declaration')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">14:06</div></div>
+      <div class="tb fu d1"><div class="tb-bg">01</div><span class="tb-tag">Tenet No. 01</span><p class="tb-q">You don't need validation.<br><em>You are the prize.</em></p></div>
+      <p class="iq fu d2">"Worth is not something you earn through performance. It is something you claim through presence."</p>
+      <p class="pr">Before any ritual, any habit, any boundary — there must be a foundation. The Worth Declaration is that foundation. It is a written, spoken, living document that defines who you are and what you will no longer accept in your life.</p>
+      <p class="pr">Most women have an unspoken, conditional relationship with their own worth — dependent on whether he texted back or the meeting went well. <strong>The modern mystic woman does not leave her worth open to daily renegotiation.</strong> She has declared it, committed it to paper, and returns to it as a north star.</p>
+      <div class="hl"><div class="hl-l">Why This Matters</div><p class="hl-t">"When you know your worth at a cellular level, you stop second-guessing decisions. You stop over-explaining. You stop apologising for taking up space. Everything downstream — your boundaries, relationships, your presence — flows from this single declaration."</p></div>
+      <p class="sh">Writing Your Declaration — The Practice</p>
+      <ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">The Non-Negotiable List</div><p class="st-d">Write 5–7 truths about who you are at your core — not aspirations, but facts. "I am a woman who..." Lead with certainty, not hope.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">The Release Statement</div><p class="st-d">Write 3 things you are officially releasing: patterns, beliefs, or people who have required you to diminish yourself. Be specific. Be final.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">The Claim</div><p class="st-d">End with a single sentence that captures your worth at its most sovereign. This becomes your anchor. Read it every morning for 30 days.</p></div></li></ul>
+      <div class="aff"><div class="ac tl"></div><div class="ac tr"></div><div class="ac bl"></div><div class="ac br"></div><div class="aff-ey">Today's Declaration</div><p class="aff-t">My worth is not for debate.<br>It is not earned, it is not proven.<br><em>It simply is.</em></p><p class="aff-i">Speak this aloud. Three times. Meet your own eyes.</p></div>
+      <div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 1</span></div><ul class="jps"><li>Where in my life have I been treating my worth as something that needs to be earned?</li><li>What would I do differently this week if I fully, truly believed I was the prize?</li><li>Write your Worth Declaration — first draft. No editing, no filtering.</li></ul></div>
+      <div class="lnav"><button class="lnb" onclick="showT('This is the first lesson')"><span class="lnb-a">←</span><span class="lnb-d">No Previous Lesson</span><span class="lnb-n" style="color:var(--mu)">You're at the beginning</span></button><button class="lnb" onclick="goL('m1l2',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">Releasing Validation</span><span class="lnb-a">→</span></button></div>
+    </div><aside class="laside">
+      <div class="aw"><div class="awt">Module Progress</div><div class="amp"><div class="amp-r"><span>Module 01</span><span class="amp-p">25%</span></div><div class="amp-tr"><div class="amp-f" style="width:25%"></div></div><div class="amp-s">1 <span>of 4 lessons</span></div></div></div>
+      <div class="aw"><div class="awt">In This Module</div><ul class="all"><li class="curr"><span class="aln-n">1</span><span class="aln">The Worth Declaration</span><span class="als">▶</span></li><li onclick="goL('m1l2',null)"><span class="aln-n">2</span><span class="aln">Releasing Validation</span><span class="als">○</span></li><li onclick="goL('m1l3',null)"><span class="aln-n">3</span><span class="aln">Rewriting Your Story</span><span class="als">○</span></li><li onclick="goL('m1l4',null)"><span class="aln-n">4</span><span class="aln">Identity Audit</span><span class="als">○</span></li></ul></div>
+      <div class="aw"><div class="awt">Downloads</div><div class="rr" onclick="showT('Downloading worksheet...')"><span class="rr-ic">📄</span><div><span class="rr-n">Worth Declaration Worksheet</span><span class="rr-t">PDF · 2 pages</span></div></div><div class="rr" onclick="showT('Opening audio...')"><span class="rr-ic">🎧</span><div><span class="rr-n">Guided Affirmation Audio</span><span class="rr-t">MP3 · 8 min</span></div></div></div>
+      <div class="aw"><div class="awt">Daily Reminder</div><div class="rm"><span class="rm-s">✦</span><p class="rm-t">"She stopped performing for others — and that was when everything changed."</p></div></div>
+    </aside></div>
+  </div>
+
+  <!-- ===== M1L2 ===== -->
+  <div class="lv" id="lv-m1l2">
+    <div class="lhero"><div class="lhero-deco">☽</div><div class="ltag">Module 01 · Foundation</div><h1 class="ltitle fu">Releasing Validation</h1><p class="lsub fu d1">The moment you stop seeking approval is the moment your power returns.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>16 min</span><span class="lmi"><span class="lmi-ic">✍</span>Journal prompts</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 01 &amp; 03</span></div></div>
+    <div class="lbody"><div class="lcon">
+      <div class="vblock fu" onclick="showT('▶ Playing: Releasing Validation')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">16:42</div></div>
+      <p class="iq fu d1">"The need for approval is the cage. Releasing it is the key."</p>
+      <p class="pr fu d2">Validation-seeking is one of the most insidious patterns a woman can carry — because it is socially rewarded. She asks for input, she explains her choices, she softens her edges to keep the peace. It looks like politeness. It feels like kindness. <strong>But it is slowly giving away her power, piece by piece.</strong></p>
+      <div class="hl"><div class="hl-l">The Pattern to Recognise</div><p class="hl-t">"Validation-seeking shows up as over-explaining decisions, apologising for your needs, shrinking your opinions when challenged, and doing things for praise rather than purpose. Once you see it, you cannot unsee it."</p></div>
+      <p class="pr">The dark feminine woman has one source of approval: herself. This does not make her cold or arrogant. It makes her <em>free</em>. When your centre of gravity is internal, no one can destabilise you by withholding their approval.</p>
+      <p class="sh">Breaking the Validation Loop</p>
+      <ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">Audit Your Approval-Seeking</div><p class="st-d">For 24 hours, notice every time you over-explain a decision, seek unnecessary feedback, or soften a truth to manage someone's reaction. Don't judge it. Just see it clearly.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">Practise the Closed Statement</div><p class="st-d">"I've decided to..." — full stop. No invitation for commentary. One sentence. No hedging. Practise in low-stakes situations first, then let it become your default.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">Sit With the Discomfort</div><p class="st-d">The first few times you don't seek approval, it will feel wrong. That discomfort is not a signal to retreat. It is evidence you are breaking a pattern. Breathe through it.</p></div></li></ul>
+      <div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 2</span></div><ul class="jps"><li>Where in my life am I seeking validation most? From whom — and why do I give them that power?</li><li>What decision have I been waiting for someone else to approve before I make it?</li><li>What would I do, say, or wear if I genuinely had zero need for anyone's approval today?</li></ul></div>
+      <div class="lnav"><button class="lnb" onclick="goL('m1l1',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">The Worth Declaration</span></button><button class="lnb" onclick="goL('m1l3',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">Rewriting Your Story</span><span class="lnb-a">→</span></button></div>
+    </div><aside class="laside">
+      <div class="aw"><div class="awt">Module Progress</div><div class="amp"><div class="amp-r"><span>Module 01</span><span class="amp-p">50%</span></div><div class="amp-tr"><div class="amp-f" style="width:50%"></div></div><div class="amp-s">2 <span>of 4 lessons</span></div></div></div>
+      <div class="aw"><div class="awt">In This Module</div><ul class="all"><li class="dn" onclick="goL('m1l1',null)"><span class="aln-n">1</span><span class="aln">The Worth Declaration</span><span class="als">✓</span></li><li class="curr"><span class="aln-n">2</span><span class="aln">Releasing Validation</span><span class="als">▶</span></li><li onclick="goL('m1l3',null)"><span class="aln-n">3</span><span class="aln">Rewriting Your Story</span><span class="als">○</span></li><li onclick="goL('m1l4',null)"><span class="aln-n">4</span><span class="aln">Identity Audit</span><span class="als">○</span></li></ul></div>
+      <div class="aw"><div class="awt">Daily Reminder</div><div class="rm"><span class="rm-s">☽</span><p class="rm-t">"Not everyone deserves access to your energy. Not everyone deserves your explanation."</p></div></div>
+    </aside></div>
+  </div>
+
+  <!-- ===== M1L3 (DEFAULT) ===== -->
+  <div class="lv on" id="lv-m1l3">
+    <div class="lhero"><div class="lhero-deco">✦</div><div class="ltag">Module 01 · Foundation</div><h1 class="ltitle fu">Rewriting Your Story</h1><p class="lsub fu d1">The narrative you've told yourself is not the truth. It is the first draft.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>18 min</span><span class="lmi"><span class="lmi-ic">✍</span>Journal prompts</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 01 &amp; 03</span></div></div>
+    <div class="lbody"><div class="lcon">
+      <div class="vblock fu" onclick="showT('▶ Playing: Rewriting Your Story')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">18:24</div></div>
+      <div class="tb fu d1"><div class="tb-bg">03</div><span class="tb-tag">Tenet No. 03</span><p class="tb-q">Stop explaining yourself.<br><em>Elevate in silence.</em></p></div>
+      <p class="iq fu d2">"The story you operate from becomes the ceiling on your life. Rewrite the story, raise the ceiling — and suddenly everything that seemed impossible becomes inevitable."</p>
+      <p class="pr">Every woman walking through this world is running on a narrative. Most were written in childhood, shaped by the words of people who didn't know their own worth either. <strong>The problem is not that you have a story. The problem is that you've stopped questioning whether it's still true.</strong></p>
+      <div class="hl"><div class="hl-l">Key Insight</div><p class="hl-t">"Identity is not fixed — it is chosen. The woman she is becoming is not a destination. It is a daily decision to refuse the old story and author a new one. This is not toxic positivity. This is ruthless self-authorship."</p></div>
+      <p class="pr">You'll recognise the old stories by how they feel: like a ceiling pressing down. Like a voice that says "who do you think you are?" The dark feminine woman has learned to hear that voice — and rewrite it, on the page, in real time.</p>
+      <p class="sh">The Rewrite Practice — 3 Steps</p>
+      <ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">Identify the Limiting Story</div><p class="st-d">Write it down exactly as your inner voice says it. "I'm not the type of woman who..." Give it form. You cannot rewrite what you cannot see clearly.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">Question Its Origin</div><p class="st-d">Ask: who told you this? When did you start believing it? Was it ever actually true — or was it someone else's fear projected onto you? Most limiting beliefs are borrowed, not earned.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">Author the New Truth</div><p class="st-d">Write the replacement — not as a wish but as a declaration of what is already becoming true. Present tense. Certain tone. No hedging. "I am a woman who..." — and mean it.</p></div></li></ul>
+      <div class="aff"><div class="ac tl"></div><div class="ac tr"></div><div class="ac bl"></div><div class="ac br"></div><div class="aff-ey">Today's Declaration</div><p class="aff-t">I am not defined by who I was.<br>I am defined by who I <em>choose to become</em>.<br>The new story begins now.</p><p class="aff-i">Speak this aloud. Three times. Look yourself in the eye.</p></div>
+      <div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 3</span></div><ul class="jps"><li>What story have I been telling myself that has been keeping me small?</li><li>Who first told me this story — and did they have the authority to define my limits?</li><li>If I were writing the story of the woman I'm becoming, what would the first line say?</li><li>What would I do differently this week if I fully believed the new story?</li></ul></div>
+      <div class="lnav"><button class="lnb" onclick="goL('m1l2',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Releasing Validation</span></button><button class="lnb" onclick="goL('m1l4',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">Identity Audit</span><span class="lnb-a">→</span></button></div>
+    </div><aside class="laside">
+      <div class="aw"><div class="awt">Module Progress</div><div class="amp"><div class="amp-r"><span>Module 01</span><span class="amp-p">50%</span></div><div class="amp-tr"><div class="amp-f" style="width:50%"></div></div><div class="amp-s">2 <span>of 4 lessons</span></div></div></div>
+      <div class="aw"><div class="awt">In This Module</div><ul class="all"><li class="dn" onclick="goL('m1l1',null)"><span class="aln-n">1</span><span class="aln">The Worth Declaration</span><span class="als">✓</span></li><li class="dn" onclick="goL('m1l2',null)"><span class="aln-n">2</span><span class="aln">Releasing Validation</span><span class="als">✓</span></li><li class="curr"><span class="aln-n">3</span><span class="aln">Rewriting Your Story</span><span class="als">▶</span></li><li onclick="goL('m1l4',null)"><span class="aln-n">4</span><span class="aln">Identity Audit</span><span class="als">○</span></li></ul></div>
+      <div class="aw"><div class="awt">Downloads</div><div class="rr" onclick="showT('Downloading...')"><span class="rr-ic">📄</span><div><span class="rr-n">Rewrite Practice Worksheet</span><span class="rr-t">PDF · 2 pages</span></div></div><div class="rr" onclick="showT('Opening audio...')"><span class="rr-ic">🎧</span><div><span class="rr-n">Guided Affirmation Audio</span><span class="rr-t">MP3 · 8 min</span></div></div><div class="rr" onclick="showT('Downloading...')"><span class="rr-ic">📓</span><div><span class="rr-n">Module 01 Journal Pack</span><span class="rr-t">PDF · 8 pages</span></div></div></div>
+      <div class="aw"><div class="awt">Daily Reminder</div><div class="rm"><span class="rm-s">☽</span><p class="rm-t">"She doesn't explain herself to anyone. She simply continues becoming."</p></div></div>
+    </aside></div>
+  </div>
+
+  <!-- ===== M1L4 ===== -->
+  <div class="lv" id="lv-m1l4">
+    <div class="lhero"><div class="lhero-deco">⚜</div><div class="ltag">Module 01 · Foundation</div><h1 class="ltitle fu">Identity Audit</h1><p class="lsub fu d1">Who you are — and who you are finally done being.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>22 min</span><span class="lmi"><span class="lmi-ic">✍</span>Deep journaling</span><span class="lmi"><span class="lmi-ic">✦</span>Module Capstone</span></div></div>
+    <div class="lbody"><div class="lcon">
+      <div class="vblock fu" onclick="showT('▶ Playing: Identity Audit')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">22:10</div></div>
+      <p class="iq fu d1">"The identity audit is not an exercise in self-criticism. It is an act of radical clarity — finally seeing yourself without the fog of other people's projections."</p>
+      <p class="pr fu d2">This is the capstone of Module 01. You've declared your worth, released validation, and begun rewriting your story. Now you audit the full picture: <strong>who have you been performing for, and who do you become when you stop?</strong></p>
+      <div class="two"><div class="cc"><div class="ccl">Identities to Release</div><ul><li>The woman who apologises for existing</li><li>The woman who plays small so others feel comfortable</li><li>The woman who needs approval before she moves</li><li>The woman who waits to be chosen</li><li>The woman who explains instead of demonstrates</li></ul></div><div class="cc af"><div class="ccl g">Identities to Claim</div><ul><li>The woman who knows her worth without proof</li><li>The woman who moves in silence, speaks in results</li><li>The woman who chooses herself daily</li><li>The woman who creates, doesn't wait</li><li>The woman no one saw coming</li></ul></div></div>
+      <div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Module 01 Capstone</span></div><ul class="jps"><li>Describe the woman you have been performing as. Who wrote that role — and who does it serve?</li><li>What identity are you most afraid to shed? What would you lose — and is that loss actually a loss?</li><li>In one paragraph: who is the woman you are becoming? Write her into existence.</li><li>What is one concrete action this week that the new identity would take — that the old one never would?</li></ul></div>
+      <div class="lnav"><button class="lnb" onclick="goL('m1l3',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Rewriting Your Story</span></button><button class="lnb" onclick="goL('m2l1',null)"><span class="lnb-d">Next: Module 02</span><span class="lnb-n">The Mystic Morning Stack</span><span class="lnb-a">→</span></button></div>
+    </div><aside class="laside">
+      <div class="aw"><div class="awt">Module Progress</div><div class="amp"><div class="amp-r"><span>Module 01</span><span class="amp-p">75%</span></div><div class="amp-tr"><div class="amp-f" style="width:75%"></div></div><div class="amp-s">3 <span>of 4 lessons</span></div></div></div>
+      <div class="aw"><div class="awt">Daily Reminder</div><div class="rm"><span class="rm-s">🜂</span><p class="rm-t">"The best revenge is the woman she became when no one was watching."</p></div></div>
+    </aside></div>
+  </div>
+
+
+  <!-- ===== M2 LESSONS ===== -->
+  <div class="lv" id="lv-m2l1">
+    <div class="lhero"><div class="lhero-deco">☽</div><div class="ltag">Module 02 · Sacred Morning Architecture</div><h1 class="ltitle fu">The Mystic Morning Stack</h1><p class="lsub fu d1">The first hour you claim as yours before the world takes everything else.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>20 min</span><span class="lmi"><span class="lmi-ic">✍</span>Ritual design</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 07</span></div></div>
+    <div class="lbody"><div class="lcon">
+      <div class="vblock fu" onclick="showT('▶ Playing: The Mystic Morning Stack')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">20:18</div></div>
+      <div class="tb fu d1"><div class="tb-bg">07</div><span class="tb-tag">Tenet No. 07</span><p class="tb-q">Focus on Mind. Body. Soul. Goals.<br><em>In that order.</em></p></div>
+      <p class="iq fu d2">"Your morning is not a to-do list. It is a ceremony. How you begin determines everything that follows."</p>
+      <p class="pr">Most women begin their day by immediately giving it away — phone in hand before their feet hit the floor. Other people's agendas, other people's urgency, other people's noise flooding the most precious, unguarded moments of the day. <strong>The Mystic Morning Stack reclaims those hours. Permanently.</strong></p>
+      <p class="sh">The Full Stack (60 min) — Adapt As Needed</p>
+      <ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">5 Minutes of Silence (Mind)</div><p class="st-d">Before anything else. No phone, no music, no input. Simply inhabit the morning. Let your mind arrive before the world does.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">Movement (Body)</div><p class="st-d">15–30 minutes. Walk, stretch, yoga, weights — whatever is yours. She moves her body before the day moves her.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">Mirror Declarations (Soul)</div><p class="st-d">5 minutes. Stand at your mirror. Speak your Worth Declaration aloud. Look yourself in the eye. This is not vanity. This is the most important meeting of your day.</p></div></li><li class="step"><div class="st-n">4</div><div><div class="st-ti">Set One Intention (Goals)</div><p class="st-d">Not a to-do list. One sentence that declares the energy or outcome you are creating today. Written in your journal. Specific, powerful, present-tense.</p></div></li><li class="step"><div class="st-n">5</div><div><div class="st-ti">No Phone for 30 Minutes After Waking</div><p class="st-d">This is non-negotiable. Your first 30 minutes belong to you — not to anyone who sent you a message overnight. They will survive. So will you.</p></div></li></ul>
+      <div class="hl"><div class="hl-l">The 5-Minute Version</div><p class="hl-t">"On low-energy days: 1 minute silence, 1 minute movement, 1 minute mirror work, 2 minutes journaling. Five minutes is enough to claim your day. The minimum is still sacred."</p></div>
+      <div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 5</span></div><ul class="jps"><li>How have I been starting my mornings? What tone has that been setting for my days?</li><li>Design your personal Mystic Morning Stack. What does your ideal first hour look like?</li><li>What is the single resistance that has been preventing a consistent morning ritual?</li></ul></div>
+      <div class="lnav"><button class="lnb" onclick="goL('m1l4',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous Module</span><span class="lnb-n">Identity Audit</span></button><button class="lnb" onclick="goL('m2l2',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">Mirror Work &amp; Declarations</span><span class="lnb-a">→</span></button></div>
+    </div><aside class="laside">
+      <div class="aw"><div class="awt">Module Progress</div><div class="amp"><div class="amp-r"><span>Module 02</span><span class="amp-p">25%</span></div><div class="amp-tr"><div class="amp-f" style="width:25%"></div></div><div class="amp-s">1 <span>of 4 lessons</span></div></div></div>
+      <div class="aw"><div class="awt">Downloads</div><div class="rr" onclick="showT('Downloading...')"><span class="rr-ic">📄</span><div><span class="rr-n">Morning Stack Guide</span><span class="rr-t">PDF · printable</span></div></div><div class="rr" onclick="showT('Opening audio...')"><span class="rr-ic">🎧</span><div><span class="rr-n">Guided Morning Ritual</span><span class="rr-t">MP3 · 12 min</span></div></div></div>
+      <div class="aw"><div class="awt">Daily Reminder</div><div class="rm"><span class="rm-s">☽</span><p class="rm-t">"The morning belongs to her before it belongs to anyone else. She has decided this."</p></div></div>
+    </aside></div>
+  </div>
+
+  <div class="lv" id="lv-m2l2"><div class="lhero"><div class="ltag">Module 02 · Sacred Morning</div><h1 class="ltitle fu">Mirror Work &amp; Declarations</h1><p class="lsub fu d1">Not wishes — declarations of truth spoken directly to yourself.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>17 min</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">17:15</div></div><p class="iq fu d1">"What you say to yourself in the mirror each morning is the most important conversation of your day."</p><p class="pr fu d2">Mirror work is not about vanity. It is about <strong>being seen by yourself</strong> — fully and without flinching. There is a difference between an affirmation and a declaration. An affirmation is something you hope is true. A declaration is something you have decided is true. This lesson trains you to speak declarations — and hold your own gaze while you do it.</p><div class="hl"><div class="hl-l">The Practice</div><p class="hl-t">"Stand before your mirror each morning. Look directly into your eyes — not past them. Speak your declarations slowly, with authority. If you flinch, you've found the declaration that needs the most practice. Stay with it."</p></div><div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 6</span></div><ul class="jps"><li>What do you feel when you look at yourself in the mirror? Describe it without judgment.</li><li>Write 5 declarations that, if you believed them completely, would change how you move through the world.</li><li>What is the declaration that is hardest to say aloud? What does that resistance reveal?</li></ul></div><div class="lnav"><button class="lnb" onclick="goL('m2l1',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">The Mystic Morning Stack</span></button><button class="lnb" onclick="goL('m2l3',null)"><span class="lnb-d">Next</span><span class="lnb-n">Journaling Templates</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m2l3"><div class="lhero"><div class="ltag">Module 02 · Sacred Morning</div><h1 class="ltitle fu">Journaling Templates</h1><p class="lsub fu d1">Every energy level has a ritual. Even the hard mornings.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>15 min</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">15:40</div></div><p class="iq fu d1">"She doesn't wait for inspiration to journal. She journals to create it."</p><p class="pr fu d2">This lesson provides three complete journaling templates: the Full Ritual (20 minutes), the Express Version (7 minutes), and the Emergency Reset (2 minutes). <strong>Every morning has a template. There are no excuses left.</strong></p><ul class="steps"><li class="step"><div class="st-n">A</div><div><div class="st-ti">Full Ritual — 20 Minutes</div><p class="st-d">Gratitude (3 items) → Intention for the day → What I'm releasing → What I'm calling in → One committed action. The complete version for full-energy mornings.</p></div></li><li class="step"><div class="st-n">B</div><div><div class="st-ti">Express Version — 7 Minutes</div><p class="st-d">One thing I'm grateful for → Today's intention → One thing I'm letting go. The compressed version that preserves the ritual's essence on busy mornings.</p></div></li><li class="step"><div class="st-n">C</div><div><div class="st-ti">Emergency Reset — 2 Minutes</div><p class="st-d">One sentence: "Today I choose..." That's it. Two minutes. The minimum viable ritual. Even this is enough to orient the day with intention.</p></div></li></ul><div class="lnav"><button class="lnb" onclick="goL('m2l2',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Mirror Work &amp; Declarations</span></button><button class="lnb" onclick="goL('m2l4',null)"><span class="lnb-d">Next</span><span class="lnb-n">The 5-Minute Version</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m2l4"><div class="lhero"><div class="ltag">Module 02 · Sacred Morning</div><h1 class="ltitle fu">The 5-Minute Version</h1><p class="lsub fu d1">The minimum is still sacred. Even five minutes claims the day as yours.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>12 min</span><span class="lmi"><span class="lmi-ic">✦</span>Module Capstone</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">12:05</div></div><p class="iq fu d1">"Five minutes of intentionality outweighs an hour of going through the motions."</p><p class="pr fu d2">Life is not always a 60-minute morning. This lesson is for the real days. <strong>The compressed ritual preserves the principle when the full practice isn't possible.</strong> No perfect streak required. Consistency trumps perfection every time.</p><p class="pr">The five-minute version: 60 seconds of stillness. 60 seconds of intentional movement. 60 seconds of mirror declarations — your three most essential. 2 minutes of the Emergency Reset journal template. Done. The morning is claimed.</p><div class="lnav"><button class="lnb" onclick="goL('m2l3',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Journaling Templates</span></button><button class="lnb" onclick="goL('m3l1',null)"><span class="lnb-d">Next: Module 03</span><span class="lnb-n">The 3-Tier Boundary System</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <!-- ===== M3 LESSONS ===== -->
+  <div class="lv" id="lv-m3l1">
+    <div class="lhero"><div class="lhero-deco">🔒</div><div class="ltag">Module 03 · The Art of the Elegant No</div><h1 class="ltitle fu">The 3-Tier Boundary System</h1><p class="lsub fu d1">Boundaries without aggression, guilt, or explanation.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>24 min</span><span class="lmi"><span class="lmi-ic">✍</span>Boundary map</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 02 &amp; 04</span></div></div>
+    <div class="lbody"><div class="lcon">
+      <div class="vblock fu" onclick="showT('▶ Playing: The 3-Tier Boundary System')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">24:33</div></div>
+      <div class="tb fu d1"><div class="tb-bg">04</div><span class="tb-tag">Tenet No. 04</span><p class="tb-q">Being selective is not cruelty.<br><em>It is wisdom.</em></p></div>
+      <p class="iq fu d2">"A boundary is not a wall. It is not punishment. It is the most loving thing you can do for yourself — and ultimately for the people in your life."</p>
+      <p class="pr">Most women who struggle with boundaries aren't afraid of conflict. They're afraid of being perceived as unkind. They've confused having standards with being cold. <strong>The 3-Tier System reframes boundaries entirely — not as aggression, but as architecture.</strong></p>
+      <p class="sh">The Three Tiers</p>
+      <ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">Tier One: Time Boundaries</div><p class="st-d">Who has access to your time, and when. Meeting availability, response times, cancellation standards, and the sacred hours of your morning ritual. Time is your most non-renewable resource.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">Tier Two: Energy Boundaries</div><p class="st-d">Who has access to your emotional and mental bandwidth. The conversations you engage in, the relationships you maintain, the content you consume. Not everyone deserves a seat at the table of your attention.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">Tier Three: Access Boundaries</div><p class="st-d">Who has access to the deeper parts of you — your plans, your vulnerabilities, your inner world. The dark feminine woman shares strategically. Mystery is not withholding. It is discernment about who has earned the privilege of knowing you fully.</p></div></li></ul>
+      <div class="hl"><div class="hl-l">The Language of Boundaries</div><p class="hl-t">"The elegant 'no' contains no apology, no over-explanation, and no invitation for negotiation. 'That doesn't work for me.' Three words. The conversation is over. The power stays with you."</p></div>
+      <div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 9</span></div><ul class="jps"><li>Map your three tiers. Who currently has access that you haven't consciously granted?</li><li>Where have you been saying yes when you meant no — and what has that cost you?</li><li>Write three boundaries you are setting this week. Specific, non-negotiable, graceful.</li></ul></div>
+      <div class="lnav"><button class="lnb" onclick="goL('m2l4',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous Module</span><span class="lnb-n">The 5-Minute Version</span></button><button class="lnb" onclick="goL('m3l2',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">Scripts for Every Situation</span><span class="lnb-a">→</span></button></div>
+    </div><aside class="laside">
+      <div class="aw"><div class="awt">Downloads</div><div class="rr" onclick="showT('Downloading...')"><span class="rr-ic">📄</span><div><span class="rr-n">3-Tier Boundary Map</span><span class="rr-t">PDF · worksheet</span></div></div><div class="rr" onclick="showT('Downloading...')"><span class="rr-ic">📄</span><div><span class="rr-n">Boundary Scripts Library</span><span class="rr-t">PDF · 6 pages</span></div></div></div>
+      <div class="aw"><div class="awt">Daily Reminder</div><div class="rm"><span class="rm-s">🔒</span><p class="rm-t">"Every 'no' is a 'yes' to herself. She has learned this. Now she practises it."</p></div></div>
+    </aside></div>
+  </div>
+
+  <div class="lv" id="lv-m3l2"><div class="lhero"><div class="ltag">Module 03 · The Elegant No</div><h1 class="ltitle fu">Scripts for Every Situation</h1><p class="lsub fu d1">The exact words. For every scenario. So you're never caught unprepared again.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>22 min</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">22:48</div></div><p class="iq fu d1">"Knowing what to say and how to say it transforms boundaries from theory into lived reality."</p><p class="pr fu d2">This lesson provides a complete library of boundary scripts — for work, relationships, family, and social situations. <strong>The elegant no requires no apology and no elaboration.</strong> This lesson shows you exactly how it sounds, how it feels, and how to say it without flinching.</p><div class="hl"><div class="hl-l">The Core Scripts</div><p class="hl-t">"'That doesn't work for me.' / 'I won't be able to.' / 'I've decided not to.' / 'That's not something I'm available for.' — These are complete sentences. Practise them until they feel natural. They will."</p></div><div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 10</span></div><ul class="jps"><li>Which script felt most difficult? What does that resistance reveal about where you give your power away?</li><li>Write a boundary conversation you've been avoiding. Practise the script on paper first.</li></ul></div><div class="lnav"><button class="lnb" onclick="goL('m3l1',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">The 3-Tier System</span></button><button class="lnb" onclick="goL('m3l3',null)"><span class="lnb-d">Next</span><span class="lnb-n">Handling Pushback with Grace</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m3l3"><div class="lhero"><div class="ltag">Module 03 · The Elegant No</div><h1 class="ltitle fu">Handling Pushback with Grace</h1><p class="lsub fu d1">When they push, she doesn't move. She simply becomes more still.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>19 min</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">19:22</div></div><p class="iq fu d1">"The woman who holds her boundary under pressure is the woman who earns her own respect for life."</p><p class="pr fu d2">Setting the boundary is the first act. Holding it when met with guilt, manipulation, or anger — that is the mastery. <strong>This lesson is about staying rooted when everything around you is trying to move you.</strong> The techniques here are specific, practical, and immediately applicable.</p><ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">The Broken Record Technique</div><p class="st-d">When pushed, simply repeat your boundary calmly and without elaboration. "I understand. As I said, that doesn't work for me." No escalation. No new explanation. The same words, the same tone. Every time.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">Acknowledge Without Conceding</div><p class="st-d">"I hear that you're disappointed." (pause) "As I said, that doesn't work for me." You can acknowledge their emotion without changing your answer. These are two entirely separate things.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">Disengage Gracefully</div><p class="st-d">When someone persists beyond reason, disengagement is not rudeness — it is self-respect. "I've said what I need to say. I'll leave it there." Then leave it there.</p></div></li></ul><div class="lnav"><button class="lnb" onclick="goL('m3l2',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Scripts</span></button><button class="lnb" onclick="goL('m3l4',null)"><span class="lnb-d">Next</span><span class="lnb-n">Your Boundary Audit</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m3l4"><div class="lhero"><div class="ltag">Module 03 · The Elegant No</div><h1 class="ltitle fu">Your Boundary Audit</h1><p class="lsub fu d1">A full inventory of where your energy is going — and to whom.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>20 min</span><span class="lmi"><span class="lmi-ic">✦</span>Module Capstone</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">20:15</div></div><p class="iq fu d1">"You cannot protect what you haven't mapped. The audit reveals the leaks."</p><p class="pr fu d2">The Module 03 capstone: a structured audit of every relationship and obligation in your life, filtered through the three-tier system. <strong>Where have you been giving access without conscious choice?</strong> That ends here.</p><div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Module 03 Capstone</span></div><ul class="jps"><li>List the five relationships or obligations that drain you most. Which tier has been violated in each?</li><li>What is the boundary you've been meaning to set for months — and what has waiting cost you?</li><li>Write the conversation. Use your scripts. Practise it here first. Then have it.</li></ul></div><div class="lnav"><button class="lnb" onclick="goL('m3l3',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Handling Pushback</span></button><button class="lnb" onclick="goL('m4l1',null)"><span class="lnb-d">Next: Module 04</span><span class="lnb-n">Body Language of Power</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+
+  <!-- ===== M4 LESSONS ===== -->
+  <div class="lv" id="lv-m4l1"><div class="lhero"><div class="lhero-deco">⚜</div><div class="ltag">Module 04 · Elegance as a Way of Being</div><h1 class="ltitle fu">Body Language of the Sovereign Woman</h1><p class="lsub fu d1">How she enters a room. How she sits. How she leaves. All of it intentional.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>21 min</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">21:30</div></div><p class="iq fu d1">"She doesn't try to take up space. She simply stops apologising for already having it."</p><p class="pr fu d2">Presence is not about performance. It is about <strong>alignment between who you are internally and how you inhabit your body externally.</strong> When that alignment exists, you don't need to announce yourself. The room adjusts.</p><ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">The Entrance</div><p class="st-d">She enters at her own pace. Not rushed, not performing — simply unhurried. Slow down your physical pace by 20% and watch how the room responds differently.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">The Posture</div><p class="st-d">Shoulders down and back — not forced, but released. The difference between armour and openness. She is not braced for impact. She has arrived.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">The Gaze</div><p class="st-d">Direct eye contact. Not staring — present. The woman who meets your eyes without looking away first carries a different kind of power.</p></div></li></ul><div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 13</span></div><ul class="jps"><li>How do I currently enter a room? Be honest. What am I communicating with my body before I've said a word?</li><li>What would change if I moved at my own pace today — in every situation?</li></ul></div><div class="lnav"><button class="lnb" onclick="goL('m3l4',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous Module</span><span class="lnb-n">Boundary Audit</span></button><button class="lnb" onclick="goL('m4l2',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">Building Your Style Philosophy</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m4l2"><div class="lhero"><div class="ltag">Module 04 · Elegance as a Way of Being</div><h1 class="ltitle fu">Building Your Style Philosophy</h1><p class="lsub fu d1">Elegance over trends. Intention over impulse. Timeless over temporary.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>19 min</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">18:55</div></div><p class="iq fu d1">"How you dress is a visual expression of the internal work you've done. Let it be honest."</p><p class="pr fu d2">Style is not fashion. Fashion follows trends. <strong>Style follows character.</strong> This lesson guides you through building a personal style philosophy — rooted in who you are, not what is currently popular. Your clothing is your non-verbal communication to the world before you've opened your mouth.</p><div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 14</span></div><ul class="jps"><li>Describe the visual identity of the woman you are becoming. What does she wear, how does she carry herself?</li><li>What pieces in your current wardrobe belong to the old identity? What is it time to release?</li><li>Write your personal style philosophy in 3 sentences.</li></ul></div><div class="lnav"><button class="lnb" onclick="goL('m4l1',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Body Language of Power</span></button><button class="lnb" onclick="goL('m4l3',null)"><span class="lnb-d">Next</span><span class="lnb-n">Voice, Pace &amp; Strategic Silence</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m4l3"><div class="lhero"><div class="ltag">Module 04 · Elegance as a Way of Being</div><h1 class="ltitle fu">Voice, Pace &amp; Strategic Silence</h1><p class="lsub fu d1">She says less. Every word lands harder for it.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>18 min</span><span class="lmi"><span class="lmi-ic">✦</span>Module Capstone</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">17:44</div></div><p class="iq fu d1">"The most powerful thing she can do in certain moments is nothing at all."</p><p class="pr fu d2">Strategic silence is a skill. Speaking slowly is a skill. <strong>The woman who controls her pace and her words controls the energy of every room she enters.</strong> This lesson is about developing that control consciously, as a daily practise.</p><div class="hl"><div class="hl-l">The Silence Practice</div><p class="hl-t">"When asked a question that requires a thoughtful answer, pause before speaking. One full breath. Two if you need them. The pause is not weakness. It is authority. It says: I answer on my own terms, in my own time."</p></div><div class="lnav"><button class="lnb" onclick="goL('m4l2',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Style Philosophy</span></button><button class="lnb" onclick="goL('m5l1',null)"><span class="lnb-d">Next: Module 05</span><span class="lnb-n">The Life Quality Audit</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <!-- ===== M5 LESSONS ===== -->
+  <div class="lv" id="lv-m5l1"><div class="lhero"><div class="lhero-deco">💎</div><div class="ltag">Module 05 · Quality Over Everything</div><h1 class="ltitle fu">The Life Quality Audit</h1><p class="lsub fu d1">Eight dimensions. An honest look. No compartment left unexamined.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>25 min</span><span class="lmi"><span class="lmi-ic">✍</span>Full audit exercise</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">25:10</div></div><p class="iq fu d1">"You cannot upgrade what you haven't honestly assessed. The audit is the upgrade."</p><p class="pr fu d2">Eight dimensions: relationships, environment, physical body, mental diet, work and purpose, finances, creativity, and spiritual life. <strong>She looks at each one and asks: does this reflect the standard of the woman I'm becoming?</strong> Where the answer is no — that's where the real work is.</p><div class="hl"><div class="hl-l">The Audit Question</div><p class="hl-t">"For each dimension, rate your current reality 1–10. Then rate your non-negotiable standard 1–10. The gap between those two numbers is your work. Not a source of shame. A map."</p></div><div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 17</span></div><ul class="jps"><li>Complete the 8-dimension audit. Where is the gap largest?</li><li>Which dimension have you been avoiding looking at honestly? What are you afraid to see?</li><li>What would a 10/10 look like in your most important dimension? Describe it in detail.</li></ul></div><div class="lnav"><button class="lnb" onclick="goL('m4l3',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous Module</span><span class="lnb-n">Voice &amp; Strategic Silence</span></button><button class="lnb" onclick="goL('m5l2',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">Releasing What No Longer Fits</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m5l2"><div class="lhero"><div class="ltag">Module 05 · Quality Over Everything</div><h1 class="ltitle fu">Releasing What No Longer Fits</h1><p class="lsub fu d1">The upgraded version of you requires an upgraded environment.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>19 min</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">19:08</div></div><p class="iq fu d1">"What once felt like loss eventually reveals itself as spaciousness."</p><p class="pr fu d2">Becoming a higher version of yourself means that some relationships, habits, and environments will no longer fit. <strong>This is not rejection. This is alignment.</strong> This lesson teaches the process of releasing with grace, not resentment — and explains why the letting go is not the end but the beginning.</p><div class="hl"><div class="hl-l">The Releasing Framework</div><p class="hl-t">"Ask of each thing you're considering releasing: does this belong to who I am becoming — or only to who I was? If the honest answer is the latter, you already know what to do. The only question is whether you're ready to do it."</p></div><div class="lnav"><button class="lnb" onclick="goL('m5l1',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Life Quality Audit</span></button><button class="lnb" onclick="goL('m5l3',null)"><span class="lnb-d">Next</span><span class="lnb-n">Attraction vs. Pursuit</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m5l3"><div class="lhero"><div class="ltag">Module 05 · Quality Over Everything</div><h1 class="ltitle fu">Attraction vs. Pursuit</h1><p class="lsub fu d1">She doesn't chase. She cultivates a life worth arriving at.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>22 min</span><span class="lmi"><span class="lmi-ic">✦</span>Module Capstone</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">22:00</div></div><p class="iq fu d1">"The energy of chasing repels what you want. The energy of becoming magnetises it."</p><p class="pr fu d2">The shift from pursuit to attraction is the energetic signature of the dark feminine. <strong>This is not passivity — it is precision.</strong> It means cultivating a life of such depth and quality that the right things, people, and opportunities arrive naturally — because you are finally the right frequency to receive them.</p><div class="tb"><div class="tb-bg">05</div><span class="tb-tag">Tenet No. 05</span><p class="tb-q">Your glow up is not for them.<br><em>It is your revenge.</em></p></div><div class="lnav"><button class="lnb" onclick="goL('m5l2',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Releasing What No Longer Fits</span></button><button class="lnb" onclick="goL('m6l1',null)"><span class="lnb-d">Next: Module 06</span><span class="lnb-n">Silence as Power Move</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <!-- ===== M6 LESSONS ===== -->
+  <div class="lv" id="lv-m6l1"><div class="lhero"><div class="lhero-deco">☽</div><div class="ltag">Module 06 · The Unforgettable Woman</div><h1 class="ltitle fu">Silence as the Ultimate Power Move</h1><p class="lsub fu d1">In the space where she used to explain, she now simply smiles.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>21 min</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 06 &amp; 08</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">20:55</div></div><div class="tb fu d1"><div class="tb-bg">08</div><span class="tb-tag">Tenet No. 08</span><p class="tb-q">Speak less. Act more.<br><em>Let results be the reply.</em></p></div><p class="iq fu d2">"They expected a reaction. She gave them nothing — and that was everything."</p><p class="pr">Silence is not absence. It is the fullest form of presence. <strong>The woman who does not rush to fill silence, justify herself, or react to provocation holds an enormous amount of power.</strong> This lesson is the practise of that power.</p><p class="pr">When you stop explaining yourself, something extraordinary happens. People stop expecting explanations. Your choices become final — not debatable. Your silence becomes a statement that requires no interpretation.</p><div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Mystic Journal — Lesson 21</span></div><ul class="jps"><li>Where in my life do I over-explain most? What am I afraid happens if I stop?</li><li>Recall a time you stayed silent when you used to react. What shifted in that moment?</li><li>Where is the silence I need to practise this week?</li></ul></div><div class="lnav"><button class="lnb" onclick="goL('m5l3',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous Module</span><span class="lnb-n">Attraction vs. Pursuit</span></button><button class="lnb" onclick="goL('m6l2',null)"><span class="lnb-d">Next Lesson</span><span class="lnb-n">The Mystery Practice</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <div class="lv" id="lv-m6l2"><div class="lhero"><div class="lhero-deco">✦</div><div class="ltag">Module 06 · The Unforgettable Woman</div><h1 class="ltitle fu">The Mystery Practice</h1><p class="lsub fu d1">Mystery is your most magnetic quality. And it is entirely cultivable.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>23 min</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 06</span></div></div><div class="lbody"><div class="lcon"><div class="vblock fu" onclick="showT('▶ Playing lesson')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">23:17</div></div><div class="tb fu d1"><div class="tb-bg">06</div><span class="tb-tag">Tenet No. 06</span><p class="tb-q">Mystery is your most magnetic quality.<br><em>Guard it.</em></p></div><p class="iq fu d2">"Mystery is not withholding. It is the art of revealing yourself slowly enough that people are always discovering something new."</p><p class="pr">Mystery is the final edge of the dark feminine — and the most misunderstood. It is not secrecy. It is depth. <strong>A woman of mystery is not closed off. She is simply so layered, so developed, so alive that one encounter is never the whole story.</strong></p><p class="pr">The mystery practise is not about playing games. It is about having such a rich inner life that you are genuinely, endlessly interesting — to yourself first, and then to others as a natural consequence.</p><div class="hl"><div class="hl-l">What Mystery Is Not</div><p class="hl-t">"Mystery is not coldness. It is not playing hard to get. It is not withholding to manipulate. It is the natural consequence of a woman who is so absorbed in her own becoming that she has no need to perform for anyone."</p></div><div class="lnav"><button class="lnb" onclick="goL('m6l1',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">Silence as Power Move</span></button><button class="lnb" onclick="goL('m6l3',null)"><span class="lnb-d">Final Lesson</span><span class="lnb-n">The Becoming Ceremony ✦</span><span class="lnb-a">→</span></button></div></div></div></div>
+
+  <!-- ===== M6L3 — FINAL LESSON ===== -->
+  <div class="lv" id="lv-m6l3">
+    <div class="lhero"><div class="lhero-deco">✦</div><div class="ltag">Module 06 · The Unforgettable Woman</div><h1 class="ltitle fu">The Becoming Ceremony</h1><p class="lsub fu d1">You have arrived. Now close the door on who you were — and walk through.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>28 min</span><span class="lmi"><span class="lmi-ic">✦</span>Final Lesson</span><span class="lmi"><span class="lmi-ic">☽</span>Course Capstone</span></div></div>
+    <div class="lbody"><div class="lcon">
+      <div class="vblock fu" onclick="showT('▶ Playing: The Becoming Ceremony')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Final Lesson</div><div class="vdur">28:00</div></div>
+      <p class="iq fu d1">"She stopped waiting to feel ready. She stopped explaining herself. She simply became — and everything changed."</p>
+      <p class="pr fu d2">You began this Codex as one woman and you are completing it as another. Not because 30 days transformed you — but because in 30 days you chose, again and again, to show up for the becoming. <strong>That choice is the transformation.</strong></p>
+      <p class="pr">The Becoming Ceremony is your closing ritual. It is a formal closing of one chapter and an intentional opening of the next. It is you, looking yourself in the eye, and saying: she arrived. And she is staying.</p>
+      <div class="tb"><div class="tb-bg">09</div><span class="tb-tag">Tenet No. 09</span><p class="tb-q"><em>She became the woman<br>no one saw coming.</em></p></div>
+      <p class="sh">The Ceremony — A Private Practice</p>
+      <ul class="steps"><li class="step"><div class="st-n">1</div><div><div class="st-ti">Create Sacred Space</div><p class="st-d">Candlelight. Quiet. No phone. Set the physical space as intentionally as you've been setting your internal one. This hour belongs to no one else.</p></div></li><li class="step"><div class="st-n">2</div><div><div class="st-ti">Read Your Journey</div><p class="st-d">Return to your journal. Read your entry from Day 1. Then read where you are now. Let the distance land. You did this. You chose this, every single day.</p></div></li><li class="step"><div class="st-n">3</div><div><div class="st-ti">Write the Closing Declaration</div><p class="st-d">One final journal entry — a letter from the woman you are now to the woman you were when you began. What do you want her to know? What are you releasing? What are you claiming going forward?</p></div></li><li class="step"><div class="st-n">4</div><div><div class="st-ti">The Mirror Moment</div><p class="st-d">Stand at your mirror one final time. Read your Worth Declaration. Then say aloud: "She became the woman no one saw coming. That woman is me." And mean every word.</p></div></li></ul>
+      <div class="aff"><div class="ac tl"></div><div class="ac tr"></div><div class="ac bl"></div><div class="ac br"></div><div class="aff-ey">The Final Declaration</div><p class="aff-t">I have done the work.<br>I have chosen myself, again and again.<br>I am <em>the woman no one saw coming</em>.<br>And I am only just beginning.</p><p class="aff-i">This is not the end. This is the foundation everything is now built on.</p></div>
+      <div class="jbox"><div class="jh"><span class="ji">📓</span><span class="jl">Final Journal Entry — The Becoming</span></div><ul class="jps"><li>Who were you on Day 1? Describe her honestly — without judgment. She got you here.</li><li>What is the single most significant shift that happened in you over these 30 days?</li><li>Write the letter to your Day 1 self. What do you want her to know?</li><li>What is the first thing the woman you've become is going to do next?</li></ul></div>
+      <div class="lnav"><button class="lnb" onclick="goL('m6l2',null)"><span class="lnb-a">←</span><span class="lnb-d">Previous</span><span class="lnb-n">The Mystery Practice</span></button><button class="lnb" onclick="goBonus()"><span class="lnb-d">Next</span><span class="lnb-n">Your Bonus Vault ✦</span><span class="lnb-a">→</span></button></div>
+    </div><aside class="laside">
+      <div class="aw"><div class="awt">Course Complete</div><div class="amp"><div class="amp-r"><span>Overall</span><span class="amp-p">100%</span></div><div class="amp-tr"><div class="amp-f" style="width:100%"></div></div><div class="amp-s">24 <span>of 24 lessons</span></div></div></div>
+      <div class="aw"><div class="awt">Daily Reminder</div><div class="rm"><span class="rm-s">✦</span><p class="rm-t">"She became the woman no one saw coming. That woman is you."</p></div></div>
+    </aside></div>
+  </div>
+
+
+  <!-- ===== BONUS VAULT ===== -->
+  <div class="bv" id="bv-main">
+    <div class="bhero">
+      <div class="bh-ey">✦ Your Vault</div>
+      <h1 class="bh-ti fu">Bonus Vault</h1>
+      <p class="bh-su fu d1">Everything included with your enrollment — yours for life.</p>
+      <p class="bh-to fu d2">Total bonus value: <strong style="color:var(--go)">$178</strong> — Included free with your enrollment</p>
+    </div>
+    <div class="bbody">
+      <div class="bgrid">
+        <div class="bcard fu"><span class="bc-ic">📓</span><div class="bc-ti">The Mystic Journal</div><p class="bc-de">A 60-page guided digital journal with custom prompts for every module and every lesson. Designed to carry you through the full 30-day transformation.</p><div class="bc-in">Includes</div><ul class="bc-li"><li>Module-by-module guided prompts</li><li>Daily intention-setting pages</li><li>The Becoming Ceremony closing section</li><li>Print or use digitally (fillable PDF)</li></ul><div class="bc-vr"><span class="bc-v">Value $47</span><button class="bc-dl" onclick="showT('📄 Opening Mystic Journal PDF...')">Download ↓</button></div></div>
+        <div class="bcard fu d1"><span class="bc-ic">🎧</span><div class="bc-ti">Ritual Audio Guides</div><p class="bc-de">Guided morning and evening rituals narrated to walk you through each practice. Play them during your ritual for full immersion — your personal mystic companion.</p><div class="bc-in">Includes</div><ul class="bc-li"><li>Morning sovereignty ritual (12 min)</li><li>Evening wind-down &amp; reflection (9 min)</li><li>Boundary-setting visualisation (7 min)</li><li>The Becoming Ceremony audio (15 min)</li></ul><div class="bc-vr"><span class="bc-v">Value $37</span><button class="bc-dl" onclick="showT('🎧 Opening audio library...')">Listen ↓</button></div></div>
+        <div class="bcard fu d2"><span class="bc-ic">💬</span><div class="bc-ti">Inner Sanctum Access</div><p class="bc-de">6 months of access to the private Modern Mystic Woman community. Share wins, ask questions, and connect with women at every stage of their becoming.</p><div class="bc-in">Includes</div><ul class="bc-li"><li>Private community forum access</li><li>Weekly group ritual prompts</li><li>Monthly live Q&amp;A with the creator</li><li>Accountability partner matching</li></ul><div class="bc-vr"><span class="bc-v">Value $67</span><button class="bc-dl" onclick="showT('💬 Opening Inner Sanctum...')">Enter →</button></div></div>
+        <div class="bcard fu d3"><span class="bc-ic">📲</span><div class="bc-ti">30-Day Daily Ritual Texts</div><p class="bc-de">One daily message every morning for 30 days — your personal Mystic reminder. A tenet, a ritual cue, or an affirmation delivered directly to your phone.</p><div class="bc-in">Includes</div><ul class="bc-li"><li>30 consecutive morning messages</li><li>Aligned to the daily module content</li><li>SMS or email delivery — your choice</li><li>Starts on your enrollment date</li></ul><div class="bc-vr"><span class="bc-v">Value $27</span><button class="bc-dl" onclick="showT('📲 Activating daily texts...')">Activate →</button></div></div>
+      </div>
+
+      <div class="tsect fu">
+        <div class="ts-ti">The Nine Tenets — Your Code</div>
+        <div class="tgrid">
+          <div class="tc"><div class="tc-n">Tenet 01</div><p class="tc-t">You don't need validation. You are the prize.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 02</div><p class="tc-t">Not everyone deserves access to your energy.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 03</div><p class="tc-t">Stop explaining yourself. Elevate in silence.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 04</div><p class="tc-t">Being selective is not cruelty — it is wisdom.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 05</div><p class="tc-t">Your glow up is not for them. It is your revenge.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 06</div><p class="tc-t">Mystery is your most magnetic quality. Guard it.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 07</div><p class="tc-t">Focus on Mind. Body. Soul. Goals. In that order.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 08</div><p class="tc-t">Speak less. Act more. Let results be the reply.</p></div>
+          <div class="tc"><div class="tc-n">Tenet 09</div><p class="tc-t">She became the woman no one saw coming.</p></div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:48px 0 16px;border-top:1px solid rgba(201,168,76,.08);margin-top:48px;">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:rgba(201,168,76,.45);margin-bottom:7px;">"She became the woman no one saw coming."</p>
+        <p style="font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.32em;color:var(--mu);">— Modern Mystic Woman · The Glow Up Codex · 2026</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div><!-- /shell -->
+
+<script>
+const TOTAL=24;
+const done=new Set(['m1l1','m1l2']);
+let cur='m1l3';
+const ML={0:['m1l1','m1l2','m1l3','m1l4'],1:['m2l1','m2l2','m2l3','m2l4'],2:['m3l1','m3l2','m3l3','m3l4'],3:['m4l1','m4l2','m4l3'],4:['m5l1','m5l2','m5l3'],5:['m6l1','m6l2','m6l3']};
+const META={
+  m1l1:{mod:'Module 01 · Sovereign Mindset',n:'Lesson 1 of 4'},m1l2:{mod:'Module 01 · Sovereign Mindset',n:'Lesson 2 of 4'},
+  m1l3:{mod:'Module 01 · Sovereign Mindset',n:'Lesson 3 of 4'},m1l4:{mod:'Module 01 · Sovereign Mindset',n:'Lesson 4 of 4'},
+  m2l1:{mod:'Module 02 · Sacred Morning',n:'Lesson 1 of 4'},m2l2:{mod:'Module 02 · Sacred Morning',n:'Lesson 2 of 4'},
+  m2l3:{mod:'Module 02 · Sacred Morning',n:'Lesson 3 of 4'},m2l4:{mod:'Module 02 · Sacred Morning',n:'Lesson 4 of 4'},
+  m3l1:{mod:'Module 03 · The Elegant No',n:'Lesson 1 of 4'},m3l2:{mod:'Module 03 · The Elegant No',n:'Lesson 2 of 4'},
+  m3l3:{mod:'Module 03 · The Elegant No',n:'Lesson 3 of 4'},m3l4:{mod:'Module 03 · The Elegant No',n:'Lesson 4 of 4'},
+  m4l1:{mod:'Module 04 · Elegance & Presence',n:'Lesson 1 of 3'},m4l2:{mod:'Module 04 · Elegance & Presence',n:'Lesson 2 of 3'},
+  m4l3:{mod:'Module 04 · Elegance & Presence',n:'Lesson 3 of 3'},
+  m5l1:{mod:'Module 05 · Quality Standards',n:'Lesson 1 of 3'},m5l2:{mod:'Module 05 · Quality Standards',n:'Lesson 2 of 3'},
+  m5l3:{mod:'Module 05 · Quality Standards',n:'Lesson 3 of 3'},
+  m6l1:{mod:'Module 06 · The Unforgettable Woman',n:'Lesson 1 of 3'},m6l2:{mod:'Module 06 · The Unforgettable Woman',n:'Lesson 2 of 3'},
+  m6l3:{mod:'Module 06 · The Unforgettable Woman',n:'Lesson 3 of 3 ✦'}
+};
+
+function goL(id,btn){
+  document.querySelectorAll('.lv,.bv').forEach(v=>v.classList.remove('on'));
+  const v=document.getElementById('lv-'+id);
+  if(!v){showT('Loading...');return;}
+  v.classList.add('on');
+  cur=id;
+  const m=META[id]||{};
+  document.getElementById('crumb').innerHTML=(m.mod?`<em>${m.mod}</em> &nbsp;/ `:'')+m.n;
+  const cb=document.getElementById('cb');
+  if(done.has(id)){cb.textContent='✓ Completed';cb.classList.add('done');}
+  else{cb.textContent='✦ Mark Complete';cb.classList.remove('done');}
+  document.querySelectorAll('.lb').forEach(b=>{
+    b.classList.remove('active');
+    const oc=b.getAttribute('onclick')||'';
+    const mm=oc.match(/goL\('([^']+)'/);
+    if(mm&&mm[1]===id)b.classList.add('active');
+  });
+  for(const[mi,ls]of Object.entries(ML)){if(ls.includes(id)){openMod(parseInt(mi));break;}}
+  document.getElementById('sbb').classList.remove('active');
+  document.getElementById('main').scrollTo({top:0,behavior:'smooth'});
+  if(window.innerWidth<=768)closeSB();
+  trigFU(v);
+}
+
+function goBonus(){
+  document.querySelectorAll('.lv,.bv').forEach(v=>v.classList.remove('on'));
+  document.getElementById('bv-main').classList.add('on');
+  document.getElementById('crumb').innerHTML='<em>Bonus Vault</em> &nbsp;· Your Included Resources';
+  document.getElementById('cb').textContent='✦ Mark Complete';
+  document.getElementById('cb').classList.remove('done');
+  document.querySelectorAll('.lb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sbb').classList.add('active');
+  document.getElementById('main').scrollTo({top:0,behavior:'smooth'});
+  if(window.innerWidth<=768)closeSB();
+  trigFU(document.getElementById('bv-main'));
+}
+
+function togM(idx,h){
+  const l=document.getElementById('m'+idx);
+  const open=l.classList.contains('open');
+  if(open){l.classList.remove('open');h.classList.remove('open','active');}
+  else{openMod(idx);}
+}
+function openMod(idx){
+  document.querySelectorAll('.ll').forEach(l=>l.classList.remove('open'));
+  document.querySelectorAll('.mh').forEach(h=>h.classList.remove('open','active'));
+  const l=document.getElementById('m'+idx);
+  const h=document.querySelector(`.mh[data-m="${idx}"]`);
+  if(l)l.classList.add('open');
+  if(h)h.classList.add('open','active');
+}
+
+function markDone(){
+  const cb=document.getElementById('cb');
+  if(done.has(cur)){done.delete(cur);cb.textContent='✦ Mark Complete';cb.classList.remove('done');updDot(cur,false);}
+  else{done.add(cur);cb.textContent='✓ Completed';cb.classList.add('done');updDot(cur,true);showT('✦ Lesson complete — she rises');}
+  updProg();
+}
+function updDot(id,state){
+  document.querySelectorAll('.lb').forEach(b=>{
+    const oc=b.getAttribute('onclick')||'';
+    const m=oc.match(/goL\('([^']+)'/);
+    if(m&&m[1]===id)b.classList.toggle('done',state);
+  });
+}
+function updProg(){
+  const c=done.size,p=Math.round((c/TOTAL)*100);
+  document.getElementById('pct').textContent=p+'%';
+  document.getElementById('pf').style.width=p+'%';
+  document.getElementById('ps').textContent=c+' of '+TOTAL+' lessons complete';
+}
+
+let tt;
+function showT(msg){
+  const el=document.getElementById('toast');
+  document.getElementById('tmsg').textContent=msg;
+  el.classList.add('on');
+  clearTimeout(tt);
+  tt=setTimeout(()=>el.classList.remove('on'),3000);
+}
+
+function openSB(){document.getElementById('sb').classList.add('open');document.getElementById('ov').classList.add('show');}
+function closeSB(){document.getElementById('sb').classList.remove('open');document.getElementById('ov').classList.remove('show');}
+
+function trigFU(container){
+  const els=container.querySelectorAll('.fu');
+  els.forEach(el=>{el.style.opacity='0';el.style.transform='translateY(14px)';});
+  requestAnimationFrame(()=>{
+    els.forEach(el=>{
+      let d=0;
+      if(el.classList.contains('d1'))d=.08;
+      else if(el.classList.contains('d2'))d=.16;
+      else if(el.classList.contains('d3'))d=.24;
+      else if(el.classList.contains('d4'))d=.32;
+      el.style.transition=`opacity .48s ${d}s ease,transform .48s ${d}s ease`;
+      requestAnimationFrame(()=>{el.style.opacity='1';el.style.transform='translateY(0)';});
+    });
+  });
+}
+
+// Scroll-triggered reveals for deeper content
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});
+},{threshold:.07});
+
+window.addEventListener('DOMContentLoaded',()=>{
+  updProg();
+  trigFU(document.querySelector('.lv.on'));
+  setTimeout(()=>{
+    document.querySelectorAll('.step,.jps li,.bcard,.tc,.rr').forEach(el=>{
+      el.style.opacity='0';el.style.transform='translateY(11px)';
+      el.style.transition='opacity .42s ease,transform .42s ease';
+      io.observe(el);
+    });
+  },300);
+});
+</script>
+</body>
+</html>

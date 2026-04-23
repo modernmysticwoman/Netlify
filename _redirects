@@ -1,0 +1,9 @@
+# Modern Mystic Woman — Netlify Redirects
+# These work alongside netlify.toml
+
+# Friendly URLs
+/login          /login.html         200
+/course         /course.html        200
+
+# Catch-all: unknown paths go to home
+/*              /index.html         200

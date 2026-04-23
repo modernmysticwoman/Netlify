@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In — Modern Mystic Woman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Cinzel:wght@400;600;900&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0608;
+    color: #f0e6d3;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .wrap { max-width: 520px; animation: fadeUp 1.2s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .spark { color: #c9a84c; font-size: 1.4rem; letter-spacing: 0.4em; margin-bottom: 32px; display: block; }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #f5e6b8, #c9a84c, #e8c97a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #8b1a2a;
+    margin-bottom: 32px;
+  }
+  .divider { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 32px; }
+  .divider span { color: #c9a84c; }
+  .line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #c9a84c, transparent); }
+  p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(240,230,211,0.6);
+    margin-bottom: 40px;
+  }
+  a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #0a0608;
+    background: linear-gradient(135deg, #f5e6b8, #c9a84c);
+    border: none;
+    padding: 16px 40px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+  a:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(201,168,76,0.3); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <span class="spark">✦ ✦ ✦</span>
+    <h1>You're In, Mystic.</h1>
+    <p class="sub">Check your inbox for your guide.</p>
+    <div class="divider"><div class="line"></div><span>✦</span><div class="line"></div></div>
+    <p>Your copy of <em>Become Her in 7 Days: The Inner Sanctum Guide</em> is on its way. Give it a moment — and check your spam folder if you don't see it within a few minutes.</p>
+    <a href="/">Return to the Sanctum</a>
+  </div>
+</body>
+</html>
