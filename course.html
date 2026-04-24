@@ -363,16 +363,16 @@ ul{list-style:none;}
 <aside class="sidebar" id="sb">
   <div class="sb-brand"><span class="sb-logo">Modern Mystic Woman</span><div class="sb-course">The Glow Up Codex</div></div>
   <div class="sb-progress">
-    <div class="sb-prog-row"><span>Your Progress</span><span class="sb-prog-pct" id="pct">8%</span></div>
-    <div class="sb-track"><div class="sb-fill" id="pf" style="width:8%"></div></div>
-    <div class="sb-sub" id="ps">2 of 24 lessons complete</div>
+    <div class="sb-prog-row"><span>Your Progress</span><span class="sb-prog-pct" id="pct">0%</span></div>
+    <div class="sb-track"><div class="sb-fill" id="pf" style="width:0%"></div></div>
+    <div class="sb-sub" id="ps">0 of 24 lessons complete</div>
   </div>
   <nav class="sb-nav">
     <span class="sb-sect">Course Modules</span>
     <div class="mh active open" data-m="0" onclick="togM(0,this)"><span class="mh-n">01</span><span class="mh-name">Sovereign Mindset</span><span class="mh-arr">▸</span></div>
     <ul class="ll open" id="m0">
-      <li><button class="lb done" onclick="goL('m1l1',this)"><div class="ld"></div><span class="lb-n">The Worth Declaration</span><span class="lb-c">✓</span></button></li>
-      <li><button class="lb done" onclick="goL('m1l2',this)"><div class="ld"></div><span class="lb-n">Releasing Validation</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb active" onclick="goL('m1l1',this)"><div class="ld"></div><span class="lb-n">The Worth Declaration</span><span class="lb-c">✓</span></button></li>
+      <li><button class="lb" onclick="goL('m1l2',this)"><div class="ld"></div><span class="lb-n">Releasing Validation</span><span class="lb-c">✓</span></button></li>
       <li><button class="lb active" onclick="goL('m1l3',this)"><div class="ld"></div><span class="lb-n">Rewriting Your Story</span><span class="lb-c">✓</span></button></li>
       <li><button class="lb" onclick="goL('m1l4',this)"><div class="ld"></div><span class="lb-n">Identity Audit</span><span class="lb-c">✓</span></button></li>
     </ul>
@@ -422,7 +422,7 @@ ul{list-style:none;}
   <div class="topbar">
     <div class="tb-l">
       <button class="hbg" onclick="openSB()"><span></span><span></span><span></span></button>
-      <div class="crumb" id="crumb">Module <em>01 · Sovereign Mindset</em> &nbsp;/ Lesson 3 of 4</div>
+      <div class="crumb" id="crumb">Module <em>01 · Sovereign Mindset</em> &nbsp;/ Lesson 1 of 4</div>
     </div>
     <div class="tb-r">
       <div class="chip">🔥 Day 3 Streak</div>
@@ -475,7 +475,7 @@ ul{list-style:none;}
   </div>
 
   <!-- ===== M1L3 (DEFAULT) ===== -->
-  <div class="lv on" id="lv-m1l3">
+  <div class="lv on" id="lv-m1l1">
     <div class="lhero"><div class="lhero-deco">✦</div><div class="ltag">Module 01 · Foundation</div><h1 class="ltitle fu">Rewriting Your Story</h1><p class="lsub fu d1">The narrative you've told yourself is not the truth. It is the first draft.</p><div class="lmeta fu d2"><span class="lmi"><span class="lmi-ic">◷</span>18 min</span><span class="lmi"><span class="lmi-ic">✍</span>Journal prompts</span><span class="lmi"><span class="lmi-ic">✦</span>Tenet 01 &amp; 03</span></div></div>
     <div class="lbody"><div class="lcon">
       <div class="vblock fu" onclick="showT('▶ Playing: Rewriting Your Story')"><div class="vbtn"><svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0l15 8.5L0 17z"/></svg></div><div class="vtag">Play Lesson</div><div class="vdur">18:24</div></div>
@@ -649,7 +649,7 @@ ul{list-style:none;}
 
 <script>
 const TOTAL=24;
-const done=new Set(['m1l1','m1l2']);
+const done=new Set([]);
 let cur='m1l3';
 const ML={0:['m1l1','m1l2','m1l3','m1l4'],1:['m2l1','m2l2','m2l3','m2l4'],2:['m3l1','m3l2','m3l3','m3l4'],3:['m4l1','m4l2','m4l3'],4:['m5l1','m5l2','m5l3'],5:['m6l1','m6l2','m6l3']};
 const META={
