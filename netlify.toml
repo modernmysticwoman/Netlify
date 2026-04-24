@@ -32,9 +32,10 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options        = "DENY"
+    X-Frame-Options        = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy        = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "frame-src https://js.stripe.com https://hooks.stripe.com;"
 
 # Cache fonts and static assets aggressively
 [[headers]]

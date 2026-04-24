@@ -17,6 +17,7 @@
 <title>Modern Mystic Woman</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;900&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
 <style>
   :root {
     --obsidian: #0a0608;
@@ -591,6 +592,174 @@
     text-transform: uppercase;
   }
 
+  .freebie-list {
+    list-style: none;
+    margin: 0 auto 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 380px;
+    text-align: left;
+  }
+  .freebie-list li {
+    font-size: 0.88rem;
+    color: rgba(240,230,211,0.7);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    padding-left: 20px;
+    position: relative;
+  }
+  .freebie-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.5rem;
+    top: 5px;
+  }
+
+  .freebie-social {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(240,230,211,0.3);
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  /* ── ENROLL ── */
+  .enroll-section {
+    background: linear-gradient(180deg, var(--obsidian) 0%, var(--deep-wine) 40%, var(--obsidian) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .enroll-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .enroll-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 120px 40px;
+    position: relative;
+    z-index: 2;
+  }
+  .enroll-card {
+    background: rgba(10,6,8,0.85);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 56px 48px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .enroll-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .enroll-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+  }
+  .enroll-spark {
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+  .enroll-price-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.5em;
+    color: rgba(201,168,76,0.6);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .enroll-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+  }
+  .enroll-price-note {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: rgba(240,230,211,0.35);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .enroll-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+    margin: 0 auto 36px;
+    max-width: 300px;
+  }
+  .enroll-divider .eline { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent); }
+  .enroll-includes {
+    list-style: none;
+    margin-bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .enroll-includes li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(240,230,211,0.65);
+    letter-spacing: 0.02em;
+  }
+  .enroll-includes li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 0.55rem;
+    flex-shrink: 0;
+    margin-top: 5px;
+    opacity: 0.7;
+  }
+  /* Stripe buy button wrapper — centered, constrained width */
+  .stripe-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  stripe-buy-button {
+    --bg-color: transparent;
+  }
+  .enroll-guarantee {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: rgba(240,230,211,0.25);
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+  @media (max-width: 600px) {
+    .enroll-card { padding: 40px 28px 36px; }
+    .enroll-inner { padding: 80px 24px; }
+  }
+
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid rgba(201,168,76,0.1);
@@ -699,6 +868,7 @@
     <li><a href="#rituals">Rituals</a></li>
     <li><a href="#tenets">Tenets</a></li>
     <li><a href="#join">Join</a></li>
+    <li><a href="#enroll" style="color:var(--gold);">Enroll</a></li>
   </ul>
 </nav>
 
@@ -723,7 +893,7 @@
     </div>
 
     <div class="cta-group">
-      <button class="btn-primary" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Begin Your Glow Up</button>
+      <button class="btn-primary" onclick="document.getElementById('enroll').scrollIntoView({behavior:'smooth'})">Begin Your Glow Up</button>
       <button class="btn-ghost" onclick="document.getElementById('pillars').scrollIntoView({behavior:'smooth'})">Explore the Path</button>
     </div>
   </div>
@@ -876,18 +1046,65 @@
   </div>
 </section>
 
+<!-- ENROLL -->
+<section class="enroll-section" id="enroll">
+  <div class="enroll-inner">
+    <p class="section-label reveal">The Glow Up Codex</p>
+    <h2 class="section-heading reveal" style="font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 56px;">Enroll &amp; Begin<br><em>Your Becoming</em></h2>
+
+    <div class="enroll-card">
+      <span class="enroll-spark">✦ ✦ ✦</span>
+      <p class="enroll-price-label">One-Time Investment</p>
+      <div class="enroll-price">$147</div>
+      <p class="enroll-price-note">Lifetime access · Instant unlock</p>
+
+      <div class="enroll-divider">
+        <div class="eline"></div>
+        <span style="color:var(--gold);font-size:.65rem;">✦</span>
+        <div class="eline"></div>
+      </div>
+
+      <ul class="enroll-includes">
+        <li>24 lessons across 6 transformational modules</li>
+        <li>The Mystic Journal — guided daily reflection prompts</li>
+        <li>Audio guides for morning sovereignty &amp; evening ritual</li>
+        <li>The Nine Tenets — your personal code of becoming</li>
+        <li>Bonus Vault: affirmation library &amp; ritual texts</li>
+        <li>Lifetime access — revisit your becoming whenever you need</li>
+      </ul>
+
+      <div class="stripe-wrap">
+        <stripe-buy-button
+          buy-button-id="buy_btn_1TPYdFRkxErY3Eu5GD60MNLo"
+          publishable-key="pk_live_51TNkKxRkxErY3Eu5egwF4tOt9uXMwYiAhAfexneWM7TMGnOCupbTNXdAKiEIjaKwOoG0RcsfOpKOIvwbTNMhCGfv00r8iopmwR"
+        ></stripe-buy-button>
+      </div>
+
+      <p class="enroll-guarantee">Secure checkout · Powered by Stripe</p>
+    </div>
+  </div>
+</section>
+
 <!-- NEWSLETTER -->
 <section class="newsletter-section" id="join">
   <div class="newsletter-inner">
-    <p class="section-label reveal">Join the Circle</p>
-    <h2 class="section-heading reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Enter the<br><em>Inner Sanctum</em></h2>
-    <p class="section-body reveal" style="margin: 0 auto; text-align: center; max-width: 480px;">Weekly rituals, mindset transmissions, and dark feminine wisdom — delivered only to those ready to rise.</p>
+    <p class="section-label reveal">Free Initiation</p>
+    <h2 class="section-heading reveal" style="font-size: clamp(2rem, 5vw, 3.6rem); margin-bottom: 12px;">Become Her in 7 Days<br><em>The Inner Sanctum Guide</em></h2>
+    <p class="section-body reveal" style="margin: 0 auto 36px; text-align: center; max-width: 560px;">This is not another self-help PDF. This is a transformation ritual. Inside, you'll unlock the exact mindset shifts, rituals, and identity upgrades to become the woman no one saw coming.</p>
+
+    <ul class="freebie-list reveal">
+      <li>The 'Unbothered Energy' mindset shift</li>
+      <li>Daily rituals that rewire your identity</li>
+      <li>How to become magnetic without chasing</li>
+      <li>The silent glow-up strategy</li>
+    </ul>
+
+    <p class="freebie-social reveal">Join 1,000+ women stepping into their power</p>
 
     <div class="join-form reveal">
-      <input class="join-input" type="email" placeholder="your@email.com">
-      <button class="join-btn">Initiate</button>
+      <input class="join-input" type="email" placeholder="Enter your email to unlock your glow up">
+      <button class="join-btn">Become Her Now</button>
     </div>
-    <p class="newsletter-promise reveal">No noise. Only essence. Unsubscribe anytime.</p>
   </div>
 </section>
 
