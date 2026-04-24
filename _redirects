@@ -1,9 +1,13 @@
-# Modern Mystic Woman — Netlify Redirects
-# These work alongside netlify.toml
+# Catch Netlify Identity invite tokens at the root and send to login.html
+# When a student clicks the invite email, the URL looks like:
+# /#invite_token=xxxxx
+# This redirect catches it and sends them to login.html with the token intact
+/#invite_token=:token   /login.html#invite_token=:token   302
+/#recovery_token=:token /login.html#recovery_token=:token 302
 
 # Friendly URLs
-/login          /login.html         200
-/course         /course.html        200
+/login          /login.html     200
+/course         /course.html    200
 
 # Catch-all: unknown paths go to home
-/*              /index.html         200
+/*              /index.html     200
