@@ -1073,10 +1073,12 @@
       <li>Lifetime access — revisit your becoming whenever you need</li>
     </ul>
 
-    <div class="join-form reveal" style="margin-top: 0;">
-      <input class="join-input" type="email" placeholder="your@email.com">
-      <button class="join-btn">Notify Me</button>
-    </div>
+    <form class="join-form reveal" style="margin-top: 0;" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="waitlist">
+      <input type="hidden" name="bot-field">
+      <input class="join-input" type="email" name="email" placeholder="your@email.com" required>
+      <button class="join-btn" type="submit">Notify Me</button>
+    </form>
     <p class="enroll-guarantee reveal">Be first. Early-access pricing available to waitlist only.</p>
   </div>
 </section>
@@ -1097,10 +1099,12 @@
 
     <p class="freebie-social reveal">Join 1,000+ women stepping into their power</p>
 
-    <div class="join-form reveal">
-      <input class="join-input" type="email" placeholder="Enter your email to unlock your glow up">
-      <button class="join-btn">Become Her Now</button>
-    </div>
+    <form class="join-form reveal" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="newsletter">
+      <input type="hidden" name="bot-field">
+      <input class="join-input" type="email" name="email" placeholder="Enter your email to unlock your glow up" required>
+      <button class="join-btn" type="submit">Become Her Now</button>
+    </form>
   </div>
 </section>
 
